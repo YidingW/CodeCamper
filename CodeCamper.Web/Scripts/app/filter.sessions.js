@@ -1,5 +1,5 @@
-﻿define('filter.sessions',
-    ['ko', 'utils', 'config'],
+﻿define("filter.sessions",
+    ["ko", "utils", "config"],
     function(ko, utils, config) {
 
         var SessionFilter = function() {
@@ -14,19 +14,19 @@
             return self;
         };
 
-        SessionFilter.prototype = function () {
-            var tagDelimiter = '|',
-                escapedTagDelimiter = '\\|',
+        SessionFilter.prototype = function() {
+            var tagDelimiter = "|",
+                escapedTagDelimiter = "\\|",
                 searchTest = function(searchText, session) {
-                        if (!searchText) return true; // always succeeds if no search text
-                        var srch = utils.regExEscape(searchText.toLowerCase());
-                        if (session.title().toLowerCase().search(srch) !== -1) return true;
-                        if (session.speaker().firstName().toLowerCase().search(srch) !== -1) return true;
-                        if (session.speaker().lastName().toLowerCase().search(srch) !== -1) return true;
-                        if (session.track().name().toLowerCase().search(srch) !== -1) return true;
-                        if (session.room().name().toLowerCase().search(srch) !== -1) return true;
-                        if ((tagDelimiter + session.tags().toLowerCase() + tagDelimiter)
-                            .search(escapedTagDelimiter + srch + escapedTagDelimiter) !== -1) return true;
+                    if (!searchText) return true; // always succeeds if no search text
+                    var srch = utils.regExEscape(searchText.toLowerCase());
+                    if (session.title().toLowerCase().search(srch) !== -1) return true;
+                    if (session.speaker().firstName().toLowerCase().search(srch) !== -1) return true;
+                    if (session.speaker().lastName().toLowerCase().search(srch) !== -1) return true;
+                    if (session.track().name().toLowerCase().search(srch) !== -1) return true;
+                    if (session.room().name().toLowerCase().search(srch) !== -1) return true;
+                    if ((tagDelimiter + session.tags().toLowerCase() + tagDelimiter)
+                        .search(escapedTagDelimiter + srch + escapedTagDelimiter) !== -1) return true;
                     return false;
                 },
                 favoriteTest = function(favoriteOnly, session) {
@@ -38,14 +38,14 @@
                     }
                 },
 
-                timeSlotTest = function (minDate, maxDate, session) {
+                timeSlotTest = function(minDate, maxDate, session) {
                     // Return true if it meets the filter criteria. Otherwise, return false
                     if (minDate && minDate > session.timeslot().start()) return false;
                     if (maxDate && maxDate < session.timeslot().start()) return false;
                     return true;
                 },
 
-                modelTest = function (timeslot, speaker, track, session) {
+                modelTest = function(timeslot, speaker, track, session) {
                     // Return true if it meets the filter criteria. Otherwise, return false
                     if (timeslot && timeslot.id() !== session.timeslot().id()) return false;
                     if (speaker && speaker.id() !== session.speaker().id()) return false;
@@ -53,7 +53,7 @@
                     return true;
                 },
 
-                predicate = function (self, session) {
+                predicate = function(self, session) {
                     // Return true if all of these meet the filter criteria. Otherwise, return false
                     var match = searchTest(self.searchText(), session)
                         && favoriteTest(self.favoriteOnly(), session)

@@ -7,15 +7,16 @@ namespace CodeCamper.Data
 {
     public class PersonsRepository : EFRepository<Person>, IPersonsRepository
     {
-        public PersonsRepository(DbContext context) : base(context) { }
+        public PersonsRepository(DbContext context) : base(context)
+        {
+        }
 
         /// <summary>
-        /// Get <see cref="Speaker"/>s at sessions.
+        ///     Get <see cref="Speaker" />s at sessions.
         /// </summary>
-        ///<remarks>
-        ///See <see cref="IPersonsRepository.GetSpeakers"/> for details.
-        ///</remarks>
-
+        /// <remarks>
+        ///     See <see cref="IPersonsRepository.GetSpeakers" /> for details.
+        /// </remarks>
         public IQueryable<Speaker> GetSpeakers()
         {
             return DbContext
@@ -23,13 +24,12 @@ namespace CodeCamper.Data
                 .Select(session => session.Speaker)
                 .Distinct().Select(s =>
                     new Speaker
-                        {    
-                                Id = s.Id,
-                                FirstName = s.FirstName,
-                                LastName = s.LastName,
-                                ImageSource = s.ImageSource,
-                        });
-       
+                    {
+                        Id = s.Id,
+                        FirstName = s.FirstName,
+                        LastName = s.LastName,
+                        ImageSource = s.ImageSource
+                    });
         }
     }
 }

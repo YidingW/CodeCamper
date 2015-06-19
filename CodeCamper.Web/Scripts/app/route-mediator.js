@@ -1,15 +1,15 @@
-﻿define('route-mediator',
-['messenger', 'config'],
-    function (messenger, config) {
+﻿define("route-mediator",
+    ["messenger", "config"],
+    function(messenger, config) {
         var
             canleaveCallback,
             self = this,
 
-            viewModelActivated = function (options) {
+            viewModelActivated = function(options) {
                 canleaveCallback = options && options.canleaveCallback;
             },
 
-            canLeave = function () {
+            canLeave = function() {
                 // Check the active view model to see if we can leave it
                 var
                     val = canleaveCallback ? canleaveCallback() : true,
@@ -17,16 +17,16 @@
                 return response;
             },
 
-            subscribeToViewModelActivations = function () {
+            subscribeToViewModelActivations = function() {
                 var context = self;
                 messenger.subscribe({
-                    topic: config.messages.viewModelActivated, 
-                    context: context, 
+                    topic: config.messages.viewModelActivated,
+                    context: context,
                     callback: viewModelActivated
-                    });
+                });
             },
 
-            init = function () {
+            init = function() {
                 subscribeToViewModelActivations();
             };
 

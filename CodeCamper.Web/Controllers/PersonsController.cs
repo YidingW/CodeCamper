@@ -15,11 +15,6 @@ namespace CodeCamper.Web.Controllers
             Uow = uow;
         }
 
-        #region OData Future: IQueryable<T>
-        //[Queryable]
-        // public IQueryable<Person> Get()
-        #endregion
-
         // GET /api/persons
         public IEnumerable<Person> Get()
         {
@@ -57,5 +52,11 @@ namespace CodeCamper.Web.Controllers
             return new HttpResponseMessage(HttpStatusCode.NoContent);
         }
 
+        #region OData Future: IQueryable<T>
+
+        //[Queryable]
+        // public IQueryable<Person> Get()
+
+        #endregion
     }
 }

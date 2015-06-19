@@ -1,13 +1,13 @@
-﻿define('datacontext.speaker-sessions', 
-    ['jquery', 'underscore', 'ko'],
-    function ($, _, ko) {
+﻿define("datacontext.speaker-sessions",
+    ["jquery", "underscore", "ko"],
+    function($, _, ko) {
         /*
          * A data "view" of speakers in cache and their cached sessions
          */
-        var SpeakerSessions = function (persons, sessions) {
-            
+        var SpeakerSessions = function(persons, sessions) {
+
             var items,
-                crossMatchSpeakers = function (observableArray, filter, sortFunction) {
+                crossMatchSpeakers = function(observableArray, filter, sortFunction) {
 
                     // clear out the results observableArray
                     observableArray([]);
@@ -20,7 +20,7 @@
                         }
                     }
                     if (filter) {
-                        underlyingArray = _.filter(underlyingArray, function (o) {
+                        underlyingArray = _.filter(underlyingArray, function(o) {
                             var match = filter.predicate(filter, o);
                             return match;
                         });
@@ -38,25 +38,25 @@
                         memo[speakerId] = memo[speakerId] || [];
                         memo[speakerId].push(s);
                         return memo;
-                    }, { });
+                    }, {});
                 },
-                
+
                 // Rebuild this data "view" from fresh server data.
                 // Returns a promise to get fresh session and person data and
                 // refresh this instance of SpeakerSessions.
                 // caller can hang its own actions on the returned promise.
-                forceDataRefresh = function () {
-                   var self = this;
-                   return $.when(
-                        sessions.getData({ forceRefresh: true }),
-                        persons.getSpeakers({ forceRefresh: true })
-                    )
-                    .done(self.refresh);
+                forceDataRefresh = function() {
+                    var self = this;
+                    return $.when(
+                            sessions.getData({ forceRefresh: true }),
+                            persons.getSpeakers({ forceRefresh: true })
+                        )
+                        .done(self.refresh);
                 },
 
                 // Get an array of sessions, sorted by title,
                 // for the speakerId (a person.id)
-                getLocalSessionsBySpeakerId = function (speakerId) {
+                getLocalSessionsBySpeakerId = function(speakerId) {
                     var speakerSessions,
                         results = !!speakerId && !!(speakerSessions = items[speakerId]) ? speakerSessions.slice() : [];
 
@@ -65,9 +65,9 @@
 
                 // Fills the 'results' observable array with speakers
                 // optionally filtered and/or sorted
-                getLocalSpeakers = function (results, options) {
+                getLocalSpeakers = function(results, options) {
                     if (!ko.isObservable(results) || results.length === undefined) {
-                        throw new Error('must provide a results observable array');
+                        throw new Error("must provide a results observable array");
                     }
                     var sortFunction = options && options.sortFunction,
                         filter = options && options.filter;
@@ -75,9 +75,9 @@
                     crossMatchSpeakers(results, filter, sortFunction);
 
                 },
-            
-                init = function () {
-                     refreshLocal();
+
+                init = function() {
+                    refreshLocal();
                 };
 
             init();
@@ -88,7 +88,7 @@
                 refreshLocal: refreshLocal,
                 forceDataRefresh: forceDataRefresh
             };
-        };      
+        };
         return {
             SpeakerSessions: SpeakerSessions
         };

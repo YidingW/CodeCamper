@@ -1,5 +1,5 @@
 ﻿<section id="favorites-view" class="view">
-    
+
     <nav>
         <ul data-bind="foreach: days">
             <li class="route-left" data-bind="css :{'route-active': isSelected()}">
@@ -15,11 +15,11 @@
     <section class="view-list" data-bind="template: {name: sessionTemplate, foreach: sessions}"></section>
 
     <!-- Knockout Debugging -->
-    <!--    
-        <div style="border:white dotted thin">
-            <h4>Sessions JSON</h4>
-            <pre data-bind="text:ko.utils.debugInfo(sessions)"></pre>
-        </div>
+    <!--
+    <div style="border:white dotted thin">
+        <h4>Sessions JSON</h4>
+        <pre data-bind="text:ko.utils.debugInfo(sessions)"></pre>
+    </div>
     -->
 
 </section>

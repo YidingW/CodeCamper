@@ -4,7 +4,7 @@ namespace CodeCamper.Model
 {
     /// <summary>A collection of "lookup" lists</summary>
     /// <remarks>
-    /// This is a DTO, not an entity backed by a database object.
+    ///     This is a DTO, not an entity backed by a database object.
     /// </remarks>
     public class Lookups
     {

@@ -15,7 +15,7 @@ namespace CodeCamper.Data.SampleData
 
             while (selected.Count < needed)
             {
-                if (Rand.NextDouble() < (double) needed / available)
+                if (Rand.NextDouble() < (double) needed/available)
                 {
                     selected.Add(items[available - 1]);
                     needed--;

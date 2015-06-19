@@ -11,15 +11,10 @@ namespace CodeCamper.Web.Controllers
 {
     public class SessionsController : ApiControllerBase
     {
-       public SessionsController(ICodeCamperUow uow)
+        public SessionsController(ICodeCamperUow uow)
         {
             Uow = uow;
         }
-
-       #region OData Future: IQueryable<T>
-       //[Queryable]
-       // public IQueryable<Session> Get()
-       #endregion
 
         // GET /api/sessions
         public IEnumerable<Session> Get()
@@ -69,5 +64,12 @@ namespace CodeCamper.Web.Controllers
             Uow.Commit();
             return new HttpResponseMessage(HttpStatusCode.NoContent);
         }
+
+        #region OData Future: IQueryable<T>
+
+        //[Queryable]
+        // public IQueryable<Session> Get()
+
+        #endregion
     }
 }

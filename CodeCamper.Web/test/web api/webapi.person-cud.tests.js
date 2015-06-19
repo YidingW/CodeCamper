@@ -1,21 +1,21 @@
-﻿(function () {
+﻿(function() {
     QUnit.config.testTimeout = 10000;
-    
+
     var okAsync = QUnit.okAsync,
         stringformat = QUnit.stringformat;
-    
-    var baseUrl = '/api/persons',
+
+    var baseUrl = "/api/persons",
         getMsgPrefix = function(id, rqstUrl) {
             return stringformat(
-                ' of person with id=\'{0}\' to \'{1}\'',
+                " of person with id='{0}' to '{1}'",
                 id, rqstUrl);
         },
         onCallSuccess = function(msgPrefix) {
             ok(true, msgPrefix + " succeeded.");
         },
-        onError = function (result, msgPrefix) {
+        onError = function(result, msgPrefix) {
             okAsync(false, msgPrefix +
-                stringformat(' failed with status=\'{1}\': {2}.',
+                stringformat(" failed with status='{1}': {2}.",
                     result.status, result.responseText));
         };
 
@@ -26,16 +26,16 @@
         origEmail,
         testEmail;
 
-    module('Web API Person update tests',
-        {
-          setup: function () {
-              testUrl = stringformat(
-                  '{0}/?id={1}', baseUrl, testPersonId);
-              testMsgBase = getMsgPrefix(testPersonId, testUrl);
-          } 
-        });
-       
-    test('Can update the test Person',
+    module("Web API Person update tests",
+    {
+        setup: function() {
+            testUrl = stringformat(
+                "{0}/?id={1}", baseUrl, testPersonId);
+            testMsgBase = getMsgPrefix(testPersonId, testUrl);
+        }
+    });
+
+    test("Can update the test Person",
         function() {
             testPerson = null;
             stop();
@@ -45,15 +45,15 @@
 
     // Step 1: Get test person (this fnc is re-used several times)
     function getTestPerson(succeed) {
-        var msgPrefix = 'GET' + testMsgBase;
+        var msgPrefix = "GET" + testMsgBase;
         $.ajax({
-            type: 'GET',
+            type: "GET",
             url: testUrl,
             success: function(result) {
                 onCallSuccess(msgPrefix);
                 okAsync(result.id === testPersonId,
                     "returned key matches testPerson Id.");
-                if (typeof succeed !== 'function') {
+                if (typeof succeed !== "function") {
                     start(); // no 'succeed' callback; end of the line
                     return;
                 } else {
@@ -71,15 +71,15 @@
         testEmail = origEmail === "wardb@contoso.com" ? "CHANGED@contoso.com" : "wardb@contoso.com"; // make it different
         testPerson.email = testEmail;
 
-        var msgPrefix = 'PUT (change)' + testMsgBase,
+        var msgPrefix = "PUT (change)" + testMsgBase,
             data = JSON.stringify(testPerson);
 
         $.ajax({
-            type: 'PUT',
+            type: "PUT",
             url: baseUrl,
             data: data,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
             success: function() {
                 onCallSuccess(msgPrefix);
                 getTestPerson(confirmUpdated);
@@ -97,15 +97,15 @@
     // Step 4: Restore orig test person in db
     function restoreTestPerson() {
         testPerson.email = origEmail;
-        var msgPrefix = 'PUT (restore)' + testMsgBase,
+        var msgPrefix = "PUT (restore)" + testMsgBase,
             data = JSON.stringify(testPerson);
 
         $.ajax({
-            type: 'PUT',
+            type: "PUT",
             url: baseUrl,
             data: data,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
             success: function() {
                 getTestPerson(confirmRestored);
             },

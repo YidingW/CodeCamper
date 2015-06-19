@@ -1,9 +1,9 @@
-﻿(function () {
+﻿(function() {
 
-    var baseUrl = '/api/sessions';
+    var baseUrl = "/api/sessions";
 
     asyncTest("Update Session - Null Title - Throws Validation Error",
-        function () {
+        function() {
             //ARRANGE
             var
                 badTestSession = {
@@ -19,24 +19,24 @@
 
             //ACT
             $.ajax({
-                type: 'PUT',
+                type: "PUT",
                 url: baseUrl,
                 data: data,
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
 
                 // ASSERT
                 success: function() {
-                    ok(false, 'Validation did not catch the null title');
+                    ok(false, "Validation did not catch the null title");
                     start();
                 },
-                error: function (result) {
+                error: function(result) {
                     debugger;
-                    equal(result.responseText, '{\"session.Title\":\"Title is required!\"}', 'Validation caught the null title');
+                    equal(result.responseText, "{\"session.Title\":\"Title is required!\"}", "Validation caught the null title");
                     start();
                 }
             });
         }
-    );   
- 
+    );
+
 })();

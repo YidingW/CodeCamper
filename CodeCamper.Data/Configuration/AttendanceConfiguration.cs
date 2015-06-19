@@ -8,7 +8,7 @@ namespace CodeCamper.Data
         public AttendanceConfiguration()
         {
             // Attendance has a composite key: SessionId and PersonId
-            HasKey(a => new { a.SessionId, a.PersonId });
+            HasKey(a => new {a.SessionId, a.PersonId});
 
             // Attendance has 1 Session, Sessions have many Attendance records
             HasRequired(a => a.Session)

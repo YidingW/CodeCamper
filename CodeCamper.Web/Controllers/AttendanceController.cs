@@ -15,16 +15,11 @@ namespace CodeCamper.Web.Controllers
             Uow = uow;
         }
 
-        #region OData Future: IQueryable<T>
-        //[Queryable]
-        // public IQueryable<Attendance> Get()
-        #endregion
-
         // GET: api/attendance
         public IEnumerable<Attendance> GetAttendance()
         {
             // Disallow fetching of all Attendance objects
-            throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Forbidden)); 
+            throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Forbidden));
         }
 
         // GET: api/attendance/?pid=2&sid=1
@@ -70,5 +65,12 @@ namespace CodeCamper.Web.Controllers
             Uow.Commit();
             return new HttpResponseMessage(HttpStatusCode.NoContent);
         }
+
+        #region OData Future: IQueryable<T>
+
+        //[Queryable]
+        // public IQueryable<Attendance> Get()
+
+        #endregion
     }
 }

@@ -44,17 +44,18 @@ namespace CodeCamper.Web.Controllers
             {
                 Rooms = GetRooms().ToList(),
                 TimeSlots = GetTimeSlots().ToList(),
-                Tracks = GetTracks().ToList(),
+                Tracks = GetTracks().ToList()
             };
             return lookups;
         }
 
         #region OData Future: IQueryable<T>
+
         //[Queryable]
         // public IQueryable<Room> Get()        
         // public IQueryable<TimeSlot> Get()
         // public IQueryable<Track> Get()
-        #endregion
 
+        #endregion
     }
 }

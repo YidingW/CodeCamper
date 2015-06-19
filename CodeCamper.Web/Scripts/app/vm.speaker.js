@@ -1,6 +1,6 @@
-﻿define('vm.speaker',
-    ['ko', 'datacontext', 'config', 'router', 'messenger'],
-    function (ko, datacontext, config, router, messenger) {
+﻿define("vm.speaker",
+    ["ko", "datacontext", "config", "router", "messenger"],
+    function(ko, datacontext, config, router, messenger) {
 
         var
             // Properties
@@ -9,33 +9,28 @@
             speaker = ko.observable(),
             speakerSessions = ko.observableArray(),
 
-            validationErrors = ko.computed(function () {
+            validationErrors = ko.computed(function() {
                 // We don;t have a speaker early on. So we return an empty [].
                 // Once we get a speaker, we want to point to its validation errors.
                 var valArray = speaker() ? ko.validation.group(speaker())() : [];
                 return valArray;
-            })
-
-            // Knockout Computeds
-            canEdit = ko.computed(function () {
+            }); // Knockout Computeds
+        canEdit = ko.computed(function() {
                 return speaker() && config.currentUser() && config.currentUser().id() === speaker().id();
             }),
-
-            isDirty = ko.computed(function () {
+            isDirty = ko.computed(function() {
                 return canEdit() ? speaker().dirtyFlag().isDirty() : false;
             }),
-
-            isValid = ko.computed(function () {
+            isValid = ko.computed(function() {
                 return canEdit() ? validationErrors().length === 0 : true;
             }),
 
             // Methods
-            activate = function (routeData, callback) {
+            activate = function(routeData, callback) {
                 messenger.publish.viewModelActivated({ canleaveCallback: canLeave });
                 currentSpeakerId(routeData.id);
                 getSpeaker(callback);
             },
-
             cancelCmd = ko.asyncCommand({
                 execute: function(complete) {
                     var callback = function() {
@@ -48,18 +43,18 @@
                     return !isExecuting && isDirty();
                 }
             }),
-
-            canLeave = function () {
+            canLeave = function() {
                 return canEdit() ? !isDirty() && isValid() : true;
             },
-
-            getSpeaker = function (completeCallback, forceRefresh) {
+            getSpeaker = function(completeCallback, forceRefresh) {
                 var callback = function() {
-                    if (completeCallback) { completeCallback(); }
+                    if (completeCallback) {
+                        completeCallback();
+                    }
                 };
                 datacontext.persons.getFullPersonById(
                     currentSpeakerId(), {
-                        success: function (s) {
+                        success: function(s) {
                             speaker(s);
                             callback();
                         },
@@ -68,7 +63,6 @@
                     forceRefresh
                 );
             },
-
             goBackCmd = ko.asyncCommand({
                 execute: function(complete) {
                     router.navigateBack();
@@ -78,7 +72,6 @@
                     return !isExecuting && !isDirty();
                 }
             }),
-
             saveCmd = ko.asyncCommand({
                 execute: function(complete) {
                     if (canEdit()) {
@@ -92,9 +85,8 @@
                     return !isExecuting && isDirty() && isValid();
                 }
             }),
-
-            tmplName = function () {
-                return canEdit() ? 'speaker.edit' : 'speaker.view';
+            tmplName = function() {
+                return canEdit() ? "speaker.edit" : "speaker.view";
             };
 
         return {

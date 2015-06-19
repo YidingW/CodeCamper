@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -8,21 +7,20 @@ using CodeCamper.Data.Contracts;
 namespace CodeCamper.Data
 {
     /// <summary>
-    /// The EF-dependent, generic repository for data access
+    ///     The EF-dependent, generic repository for data access
     /// </summary>
     /// <typeparam name="T">Type of entity for this Repository.</typeparam>
     public class EFRepository<T> : IRepository<T> where T : class
     {
         public EFRepository(DbContext dbContext)
         {
-            if (dbContext == null) 
+            if (dbContext == null)
                 throw new ArgumentNullException("dbContext");
             DbContext = dbContext;
             DbSet = DbContext.Set<T>();
         }
 
         protected DbContext DbContext { get; set; }
-
         protected DbSet<T> DbSet { get; set; }
 
         public virtual IQueryable<T> GetAll()
@@ -55,7 +53,7 @@ namespace CodeCamper.Data
             if (dbEntityEntry.State == EntityState.Detached)
             {
                 DbSet.Attach(entity);
-            }  
+            }
             dbEntityEntry.State = EntityState.Modified;
         }
 

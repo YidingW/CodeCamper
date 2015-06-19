@@ -1,28 +1,28 @@
 ﻿define(
-    'dataservice.session-tests-function',
-    ['jquery', 'amplify', 'config', ],
-    function ($, amplify, config) {
+    "dataservice.session-tests-function",
+    ["jquery", "amplify", "config",],
+    function($, amplify, config) {
 
-        var doNothing = function () { };
+        var doNothing = function() {};
 
         var retrievalTestSessionId = 1; // Keynote / KEY001
 
         config.currentUserId = 3;
-        config.currentUser = function () { return { id: function () { return 3; } }; };
+        config.currentUser = function() { return { id: function() { return 3; } }; };
         config.logger = { success: doNothing };
         config.dataserviceInit();
 
-        var findDs = function () {
+        var findDs = function() {
             var ds = window.testFn(amplify);
             config.useMocks(true); // this helps me NOT mock datacontext
             return ds;
             //return window.testFn($); // purely for the course to test the non amplify version
         };
 
-        module('Session Data Services return data');
+        module("Session Data Services return data");
 
-        asyncTest('getSessionBriefs returns array SessionBrief objects',
-            function () {
+        asyncTest("getSessionBriefs returns array SessionBrief objects",
+            function() {
                 //ARRANGE
                 var ds = findDs();
 
@@ -30,19 +30,19 @@
                 ds.getSessionBriefs({
 
                     //ASSERT
-                    success: function (result) {
-                        ok(result && result.length > 0, 'Got SessionBriefs');
+                    success: function(result) {
+                        ok(result && result.length > 0, "Got SessionBriefs");
                         start();
-                    }, 
-                    error: function (result) {
-                        ok(false, 'Failed with: ' + result.responseText);
+                    },
+                    error: function(result) {
+                        ok(false, "Failed with: " + result.responseText);
                         start();
                     }
                 });
             });
 
-        asyncTest('getSessions returns array Session objects',
-            function () {
+        asyncTest("getSessions returns array Session objects",
+            function() {
                 //ARRANGE
                 var ds = findDs();
 
@@ -50,19 +50,19 @@
                 ds.getSessions({
 
                     //ASSERT
-                    success: function (result) {
-                        ok(result && result.length > 0, 'Got Sessions');
+                    success: function(result) {
+                        ok(result && result.length > 0, "Got Sessions");
                         start();
                     },
-                    error: function (result) {
-                        ok(false, 'Failed with: ' + result.responseText);
+                    error: function(result) {
+                        ok(false, "Failed with: " + result.responseText);
                         start();
                     }
                 });
             });
 
-        asyncTest('getSession returns 1 Session object',
-            function () {
+        asyncTest("getSession returns 1 Session object",
+            function() {
                 //ARRANGE
                 var ds = findDs();
 
@@ -70,30 +70,30 @@
                 ds.getSession({
 
                     //ASSERT
-                    success: function (result) {
-                        ok(result && result.title === 'Single Page Apps', 'Got 1 Session, the SPA');
+                    success: function(result) {
+                        ok(result && result.title === "Single Page Apps", "Got 1 Session, the SPA");
                         start();
                     },
-                    error: function (result) {
-                        ok(false, 'Failed with: ' + result.responseText);
+                    error: function(result) {
+                        ok(false, "Failed with: " + result.responseText);
                         start();
                     }
                 }, retrievalTestSessionId);
             });
 
-        module('Session Data Services update data');
+        module("Session Data Services update data");
 
-        asyncTest('updateSession updates description',
-            function () {
+        asyncTest("updateSession updates description",
+            function() {
 
                 //ARRANGE
                 var ds = findDs();
                 var toggleDescription = function(s, changeIt) {
-                    s.description = changeIt ? 'C H A N G E D' : 'Change the World';
+                    s.description = changeIt ? "C H A N G E D" : "Change the World";
                 };
                 ds.getSession({
-                    success: 
-                        function (result) {
+                    success:
+                        function(result) {
                             var testSession = result;
 
                             //ACT
@@ -103,38 +103,38 @@
                             ds.updateSession({
 
                                 //ASSERT
-                                success: function (result) {
+                                success: function(result) {
                                     ds.getSession(
                                         {
                                             success:
-                                                function (result) {
+                                                function(result) {
                                                     var testSession2ndTry = result;
 
-                                                    ok(testSession2ndTry.description, testSession.description, 'Description was updated successfully');
+                                                    ok(testSession2ndTry.description, testSession.description, "Description was updated successfully");
 
                                                     //RESET
                                                     toggleDescription(testSession, false);
                                                     testSessionJSON = JSON.stringify(testSession);
                                                     ds.updateSession({
-                                                        success: function () { start(); },
-                                                        error: function () { start(); }
+                                                        success: function() { start(); },
+                                                        error: function() { start(); }
                                                     }, testSessionJSON);
                                                 },
-                                            error: function (result) {
-                                                ok(false, 'Failed with: ' + result.responseText);
+                                            error: function(result) {
+                                                ok(false, "Failed with: " + result.responseText);
                                                 start();
                                             }
-                                        }, 
+                                        },
                                         retrievalTestSessionId);
-                                }, 
-                                error: function (result) {
-                                    ok(false, 'Failed with: ' + result.responseText);
+                                },
+                                error: function(result) {
+                                    ok(false, "Failed with: " + result.responseText);
                                     start();
                                 }
                             }, testSessionJSON);
                         },
                     error: function(result) {
-                        ok(false, 'Failed with: ' + result.responseText);
+                        ok(false, "Failed with: " + result.responseText);
                         start();
                     }
                 }, retrievalTestSessionId);

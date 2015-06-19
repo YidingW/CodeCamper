@@ -14,12 +14,16 @@ QUnit.extend(QUnit, {
      * @example stringformat("i can speak {0} since i was {1}",'javascript',10}); 
      *
      */
-    stringformat: function (str, col) {
-        col = typeof col === 'object' ? col : Array.prototype.slice.call(arguments, 1);
+    stringformat: function(str, col) {
+        col = typeof col === "object" ? col : Array.prototype.slice.call(arguments, 1);
 
-        return str.replace(/\{\{|\}\}|\{(\w+)\}/g, function (m, n) {
-            if (m == '{{') { return '{'; }
-            if (m == '}}') { return '}'; }
+        return str.replace(/\{\{|\}\}|\{(\w+)\}/g, function(m, n) {
+            if (m == "{{") {
+                return "{";
+            }
+            if (m == "}}") {
+                return "}";
+            }
             return col[n];
         });
     },

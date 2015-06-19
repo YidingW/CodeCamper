@@ -1,7 +1,7 @@
-﻿define('model.session',
-    ['ko', 'config'],
-    function (ko, config) {
-        var Session = function () {
+﻿define("model.session",
+    ["ko", "config"],
+    function(ko, config) {
+        var Session = function() {
             var self = this;
             self.id = ko.observable();
             self.title = ko.observable().extend({ required: true });
@@ -15,56 +15,53 @@
             self.description = ko.observable();
             self.isFavoriteRefresh = ko.observable();
 
-            self.sessionHash = ko.computed(function () {
-                return config.hashes.sessions + '/' + self.id();
+            self.sessionHash = ko.computed(function() {
+                return config.hashes.sessions + "/" + self.id();
             });
 
             self.tagsFormatted = ko.computed({
-                read: function () {
-                    var text = self.tags();
-                    return text ? text.replace(/\|/g, ', ') : text;
-                },
+                    read: function() {
+                        var text = self.tags();
+                        return text ? text.replace(/\|/g, ", ") : text;
+                    },
 
-                write: function (value) {
-                    self.tags(value.replace(/\, /g, '|'));
-                }
-            }),
+                    write: function(value) {
+                        self.tags(value.replace(/\, /g, "|"));
+                    }
+                }),
+                self.isFavorite = ko.computed({
+                    read: function() {
+                        self.isFavoriteRefresh(); // This exists so we can notify the isFavorite to reevaluate
+                        var match = self.attendance().sessionId() === self.id();
+                        return !!match;
+                    },
 
-            self.isFavorite = ko.computed({
-                read: function () {
-                    self.isFavoriteRefresh(); // This exists so we can notify the isFavorite to reevaluate
-                    var match = self.attendance().sessionId() === self.id();
-                    return !!match;
-                },
+                    // The 'deferEvalation' flag will prevent it from running immediately
+                    // and it will wait until something actually tries to access its value.
+                    deferEvaluation: true,
 
-                // The 'deferEvalation' flag will prevent it from running immediately
-                // and it will wait until something actually tries to access its value.
-                deferEvaluation: true,
+                    write: function(value) {
+                        // Made this a no-op because without the write, 
+                        // when the checkbox is clicked it fires the click event twice 
+                        // and sets the computed = true (not the function)
+                        return;
+                    },
 
-                write: function (value) {
-                    // Made this a no-op because without the write, 
-                    // when the checkbox is clicked it fires the click event twice 
-                    // and sets the computed = true (not the function)
-                    return;
-                },
+                    owner: self
+                }),
+                self.isUnlocked = ko.computed({
+                    read: function() {
+                        var
+                            attendance = self.attendance(),
+                            unlocked = !(attendance.rating() > 0 || (attendance.text() && attendance.text().length > 0));
 
-                owner: self
-            }),
+                        self.isFavoriteRefresh(); // This exists so we can notify the isUnlocked to reevaluate
 
-            self.isUnlocked = ko.computed({
-                read: function () {
-                    var
-                        attendance = self.attendance(),
-                        unlocked = !(attendance.rating() > 0 || (attendance.text() && attendance.text().length > 0));
-
-                    self.isFavoriteRefresh(); // This exists so we can notify the isUnlocked to reevaluate
-
-                    return unlocked;
-                },
-                deferEvaluation: true
-            }),
-
-            self.isBrief = ko.observable(true);
+                        return unlocked;
+                    },
+                    deferEvaluation: true
+                }),
+                self.isBrief = ko.observable(true);
             self.dirtyFlag = new ko.DirtyFlag([
                 self.title,
                 self.code,
@@ -74,55 +71,58 @@
                 self.roomId,
                 self.level,
                 self.tags,
-                self.description]);
+                self.description
+            ]);
             return self;
         };
 
         Session.Nullo = new Session()
             .id(0)
-            .title('Not a Session')
-            .code('')
+            .title("Not a Session")
+            .code("")
             .speakerId(0)
             .trackId(0)
             .timeslotId(0)
             .roomId(0)
-            .description('')
-            .level('')
-            .tags('');
+            .description("")
+            .level("")
+            .tags("");
         Session.Nullo.isNullo = true;
-        Session.Nullo.isBrief = function () { return false; }; // nullo is never brief
+        Session.Nullo.isBrief = function() { return false; }; // nullo is never brief
         Session.Nullo.dirtyFlag().reset();
 
         var _dc = null;
         // Static member, no access to instances of Session
-        Session.datacontext = function (dc) {
-            if (dc) { _dc = dc; }
+        Session.datacontext = function(dc) {
+            if (dc) {
+                _dc = dc;
+            }
             return _dc;
         };
 
 
         // Prototype is available to all instances.
         // It has access to the properties of the instance of Session.
-        Session.prototype = function () {
+        Session.prototype = function() {
             var
                 dc = Session.datacontext,
-                attendance = function () {
+                attendance = function() {
                     return dc().attendance.getLocalSessionFavorite(this.id());
                 },
 
-                room = function () {
+                room = function() {
                     return dc().rooms.getLocalById(this.roomId());
                 },
 
-                speaker = function () {
+                speaker = function() {
                     return dc().persons.getLocalById(this.speakerId());
                 },
 
-                timeslot = function () {
+                timeslot = function() {
                     return dc().timeslots.getLocalById(this.timeslotId());
                 },
 
-                track = function () {
+                track = function() {
                     return dc().tracks.getLocalById(this.trackId());
                 };
 
@@ -137,4 +137,4 @@
         }();
 
         return Session;
-});
+    });

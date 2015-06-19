@@ -1,18 +1,18 @@
-﻿define('store',
-    ['jquery', 'amplify', 'config'],
-    function ($, amplify, config) {
+﻿define("store",
+    ["jquery", "amplify", "config"],
+    function($, amplify, config) {
         var
             expires = { expires: config.storeExpirationMs },
-            
-            clear = function (key) {
+
+            clear = function(key) {
                 return amplify.store(key, null);
             },
 
-            fetch = function (key) {
+            fetch = function(key) {
                 return amplify.store(key);
             },
-            
-            save = function (key, value) {
+
+            save = function(key, value) {
                 amplify.store(key, value, expires);
             };
 

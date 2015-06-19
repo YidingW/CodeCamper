@@ -1,13 +1,13 @@
 ﻿define(
-    'vm-speaker-tests-function',
-    ['ko', 'datacontext', 'config'],
-    function (ko, datacontext, config) {
+    "vm-speaker-tests-function",
+    ["ko", "datacontext", "config"],
+    function(ko, datacontext, config) {
 
-        var doNothing = function () { };
+        var doNothing = function() {};
 
         config.useMocks(true); // this helps me NOT mock datacontext
         config.currentUserId = 3;
-        config.currentUser = function () { return { id: function () { return 3; } }; };
+        config.currentUser = function() { return { id: function() { return 3; } }; };
         config.logger = { success: doNothing };
         config.dataserviceInit();
 
@@ -22,20 +22,20 @@
         var
             testPersonId = config.currentUserId,
             testRouteData = { id: testPersonId },
-            fakeEmail = 'fake@contoso.com';
+            fakeEmail = "fake@contoso.com";
 
-        var findVm = function () {
+        var findVm = function() {
             return window.testFn(ko, datacontext, config, fakeRouter, fakeMessenger);
         };
 
-        module('speaker viewmodel tests');
+        module("speaker viewmodel tests");
 
-        asyncTest('Update speaker and viewmodel is dirty',
-            function () {
+        asyncTest("Update speaker and viewmodel is dirty",
+            function() {
                 //ARRANGE
                 var vmSpeaker = findVm();
-                
-                vmSpeaker.activate(testRouteData, function () {
+
+                vmSpeaker.activate(testRouteData, function() {
 
                     var
                         speaker = vmSpeaker.speaker(),
@@ -45,7 +45,7 @@
                     speaker.email(fakeEmail);
 
                     //ASSERT
-                    ok(speaker.isDirty(), 'Emailed changed and speaker is dirty');
+                    ok(speaker.isDirty(), "Emailed changed and speaker is dirty");
 
                     //RESET
                     speaker.email(originalEmail);
@@ -54,18 +54,18 @@
             }
         );
 
-        asyncTest('Get speaker and viewmodel is NOT dirty',
-            function () {
+        asyncTest("Get speaker and viewmodel is NOT dirty",
+            function() {
                 //ARRANGE
                 var vmSpeaker = findVm();
 
-                vmSpeaker.activate(testRouteData, function () {
+                vmSpeaker.activate(testRouteData, function() {
 
                     //ACT
                     var speaker = vmSpeaker.speaker();
 
                     //ASSERT
-                    ok(!speaker.isDirty(), 'Verified that speaker is NOT dirty yet');
+                    ok(!speaker.isDirty(), "Verified that speaker is NOT dirty yet");
 
                     //RESET
                     start();
@@ -73,22 +73,22 @@
             }
         );
 
-        asyncTest('Update speaker last name to empty string and viewmodel is invalid',
-            function () {
+        asyncTest("Update speaker last name to empty string and viewmodel is invalid",
+            function() {
                 //ARRANGE
                 var vmSpeaker = findVm();
 
-                vmSpeaker.activate(testRouteData, function () {
+                vmSpeaker.activate(testRouteData, function() {
 
                     var
                         speaker = vmSpeaker.speaker(),
                         originalLastName = speaker.lastName();
 
                     //ACT
-                    speaker.lastName('');
+                    speaker.lastName("");
 
                     //ASSERT
-                    ok(!speaker.isValid(), 'Last name changed to empty string and speaker is invalid');
+                    ok(!speaker.isValid(), "Last name changed to empty string and speaker is invalid");
 
                     //RESET
                     speaker.lastName(originalLastName);
@@ -97,22 +97,22 @@
             }
         );
 
-        asyncTest('Update speaker last name to valid value and viewmodel is valid',
-            function () {
+        asyncTest("Update speaker last name to valid value and viewmodel is valid",
+            function() {
                 //ARRANGE
                 var vmSpeaker = findVm();
 
-                vmSpeaker.activate(testRouteData, function () {
+                vmSpeaker.activate(testRouteData, function() {
 
                     var
                         speaker = vmSpeaker.speaker(),
                         originalLastName = speaker.lastName();
 
                     //ACT
-                    speaker.lastName('ValidName');
+                    speaker.lastName("ValidName");
 
                     //ASSERT
-                    ok(speaker.isValid(), 'Last name changed to valid value and speaker is valid');
+                    ok(speaker.isValid(), "Last name changed to valid value and speaker is valid");
 
                     //RESET
                     speaker.lastName(originalLastName);

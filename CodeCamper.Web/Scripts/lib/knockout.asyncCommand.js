@@ -4,7 +4,7 @@
 (function(ko) {
     ko.asyncCommand = function(options) {
         var
-        self = ko.observable(),
+            self = ko.observable(),
             canExecuteDelegate = options.canExecute,
             executeDelegate = options.execute,
 
@@ -30,15 +30,14 @@
         };
         return self;
     };
-})(ko);
-
-;(function (ko) {
-    ko.utils.wrapAccessor = function (accessor) {
-        return function () {
+})(ko);;
+(function(ko) {
+    ko.utils.wrapAccessor = function(accessor) {
+        return function() {
             return accessor;
         };
     };
-    
+
     ko.bindingHandlers.command = {
         init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
             var value = valueAccessor();
@@ -49,9 +48,8 @@
             for (var command in commands) {
                 if (ko.bindingHandlers[command]) {
                     ko.bindingHandlers[command].init(
-                    element, ko.utils.wrapAccessor(commands[command].execute), allBindingsAccessor, viewModel);
-                }
-                else {
+                        element, ko.utils.wrapAccessor(commands[command].execute), allBindingsAccessor, viewModel);
+                } else {
                     var events = {};
 
                     for (var command in commands) {
@@ -59,7 +57,7 @@
                     }
 
                     ko.bindingHandlers.event.init(
-                    element, ko.utils.wrapAccessor(events), allBindingsAccessor, viewModel);
+                        element, ko.utils.wrapAccessor(events), allBindingsAccessor, viewModel);
                 }
             }
         },

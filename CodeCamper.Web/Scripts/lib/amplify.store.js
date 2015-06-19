@@ -8,9 +8,9 @@
  *
  * http://amplifyjs.com
  */
-(function (amplify, undefined) {
+(function(amplify, undefined) {
 
-    var store = amplify.store = function (key, value, options) {
+    var store = amplify.store = function(key, value, options) {
         var type = store.type;
         if (options && options.type && options.type in store.types) {
             type = options.type;
@@ -20,27 +20,31 @@
 
     store.types = {};
     store.type = null;
-    store.addType = function (type, storage) {
+    store.addType = function(type, storage) {
         if (!store.type) {
             store.type = type;
         }
 
         store.types[type] = storage;
-        store[type] = function (key, value, options) {
+        store[type] = function(key, value, options) {
             options = options || {};
             options.type = type;
             return store(key, value, options);
         };
     };
-    store.error = function () {
+    store.error = function() {
         return "amplify.store quota exceeded";
     };
 
     var rprefix = /^__amplify__/;
 
     function createFromStorageInterface(storageType, storage) {
-        store.addType(storageType, function (key, value, options) {
-            var storedValue, parsed, i, remove, ret = value,
+        store.addType(storageType, function(key, value, options) {
+            var storedValue,
+                parsed,
+                i,
+                remove,
+                ret = value,
                 now = (new Date()).getTime();
 
             if (!key) {
@@ -68,7 +72,8 @@
                     while (key = remove.pop()) {
                         storage.removeItem(key);
                     }
-                } catch (error) { }
+                } catch (error) {
+                }
                 return ret;
             }
 
@@ -126,7 +131,8 @@
             window[webStorageType].setItem("__amplify__", "x");
             window[webStorageType].removeItem("__amplify__");
             createFromStorageInterface(webStorageType, window[webStorageType]);
-        } catch (e) { }
+        } catch (e) {
+        }
     }
 
     // globalStorage
@@ -142,13 +148,14 @@
             if (store.type === "sessionStorage") {
                 store.type = "globalStorage";
             }
-        } catch (e) { }
+        } catch (e) {
+        }
     }
 
     // userData
     // non-standard: IE 5+
     // http://msdn.microsoft.com/en-us/library/ms531424(v=vs.85).aspx
-    (function () {
+    (function() {
         // IE 9 has quirks in userData that are a huge pain
         // rather than finding a way to detect these quirks
         // we just don't register userData if we have localStorage
@@ -174,9 +181,14 @@
             return;
         }
 
-        store.addType("userData", function (key, value, options) {
+        store.addType("userData", function(key, value, options) {
             div.load(attrKey);
-            var attr, parsed, prevValue, i, remove, ret = value,
+            var attr,
+                parsed,
+                prevValue,
+                i,
+                remove,
+                ret = value,
                 now = (new Date()).getTime();
 
             if (!key) {
@@ -262,7 +274,7 @@
 
     // in-memory storage
     // fallback for all browsers to enable the API even if we can't persist data
-    (function () {
+    (function() {
         var memory = {},
             timeout = {};
 
@@ -270,7 +282,7 @@
             return obj === undefined ? undefined : JSON.parse(JSON.stringify(obj));
         }
 
-        store.addType("memory", function (key, value, options) {
+        store.addType("memory", function(key, value, options) {
             if (!key) {
                 return copy(memory);
             }
@@ -291,7 +303,7 @@
 
             memory[key] = value;
             if (options.expires) {
-                timeout[key] = setTimeout(function () {
+                timeout[key] = setTimeout(function() {
                     delete memory[key];
                     delete timeout[key];
                 }, options.expires);

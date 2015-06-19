@@ -5,21 +5,21 @@ using CodeCamper.Model;
 namespace CodeCamper.Data
 {
     /// <summary>
-    /// The Code Camper "Unit of Work"
+    ///     The Code Camper "Unit of Work"
     ///     1) decouples the repos from the controllers
     ///     2) decouples the DbContext and EF from the controllers
     ///     3) manages the UoW
     /// </summary>
     /// <remarks>
-    /// This class implements the "Unit of Work" pattern in which
-    /// the "UoW" serves as a facade for querying and saving to the database.
-    /// Querying is delegated to "repositories".
-    /// Each repository serves as a container dedicated to a particular
-    /// root entity type such as a <see cref="Person"/>.
-    /// A repository typically exposes "Get" methods for querying and
-    /// will offer add, update, and delete methods if those features are supported.
-    /// The repositories rely on their parent UoW to provide the interface to the
-    /// data layer (which is the EF DbContext in Code Camper).
+    ///     This class implements the "Unit of Work" pattern in which
+    ///     the "UoW" serves as a facade for querying and saving to the database.
+    ///     Querying is delegated to "repositories".
+    ///     Each repository serves as a container dedicated to a particular
+    ///     root entity type such as a <see cref="Person" />.
+    ///     A repository typically exposes "Get" methods for querying and
+    ///     will offer add, update, and delete methods if those features are supported.
+    ///     The repositories rely on their parent UoW to provide the interface to the
+    ///     data layer (which is the EF DbContext in Code Camper).
     /// </remarks>
     public class CodeCamperUow : ICodeCamperUow, IDisposable
     {
@@ -28,20 +28,45 @@ namespace CodeCamper.Data
             CreateDbContext();
 
             repositoryProvider.DbContext = DbContext;
-            RepositoryProvider = repositoryProvider;       
+            RepositoryProvider = repositoryProvider;
         }
 
+        protected IRepositoryProvider RepositoryProvider { get; set; }
+        private CodeCamperDbContext DbContext { get; set; }
         // Code Camper repositories
 
-        public IRepository<Room> Rooms { get { return GetStandardRepo<Room>(); } }
-        public IRepository<TimeSlot> TimeSlots { get { return GetStandardRepo<TimeSlot>(); } }
-        public IRepository<Track> Tracks { get { return GetStandardRepo<Track>(); } }
-        public ISessionsRepository Sessions { get { return GetRepo<ISessionsRepository>(); } }
-        public IPersonsRepository Persons { get { return GetRepo<IPersonsRepository>(); } }
-        public IAttendanceRepository Attendance { get { return GetRepo<IAttendanceRepository>(); } }
+        public IRepository<Room> Rooms
+        {
+            get { return GetStandardRepo<Room>(); }
+        }
+
+        public IRepository<TimeSlot> TimeSlots
+        {
+            get { return GetStandardRepo<TimeSlot>(); }
+        }
+
+        public IRepository<Track> Tracks
+        {
+            get { return GetStandardRepo<Track>(); }
+        }
+
+        public ISessionsRepository Sessions
+        {
+            get { return GetRepo<ISessionsRepository>(); }
+        }
+
+        public IPersonsRepository Persons
+        {
+            get { return GetRepo<IPersonsRepository>(); }
+        }
+
+        public IAttendanceRepository Attendance
+        {
+            get { return GetRepo<IAttendanceRepository>(); }
+        }
 
         /// <summary>
-        /// Save pending changes to the database
+        ///     Save pending changes to the database
         /// </summary>
         public void Commit()
         {
@@ -68,18 +93,15 @@ namespace CodeCamper.Data
             // we'd have to be careful. We're not being that careful.
         }
 
-        protected IRepositoryProvider RepositoryProvider { get; set; }
-
         private IRepository<T> GetStandardRepo<T>() where T : class
         {
             return RepositoryProvider.GetRepositoryForEntityType<T>();
         }
+
         private T GetRepo<T>() where T : class
         {
             return RepositoryProvider.GetRepository<T>();
         }
-
-        private CodeCamperDbContext DbContext { get; set; }
 
         #region IDisposable
 

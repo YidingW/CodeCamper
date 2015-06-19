@@ -1,9 +1,9 @@
 ﻿define(
-    'vm-favorites-tests-function',
-    ['jquery', 'underscore', 'ko', 'datacontext', 'router', 'filter.sessions', 'sort', 'group', 'utils', 'config', 'event.delegates'],
-    function ($, _, ko, datacontext, router, filter, sort, group, utils, config, eventDelegates) {
+    "vm-favorites-tests-function",
+    ["jquery", "underscore", "ko", "datacontext", "router", "filter.sessions", "sort", "group", "utils", "config", "event.delegates"],
+    function($, _, ko, datacontext, router, filter, sort, group, utils, config, eventDelegates) {
 
-        var doNothing = function(){};
+        var doNothing = function() {};
 
         config.useMocks(true); // this helps me NOT mock datacontext
         config.currentUserId = 3;
@@ -21,7 +21,7 @@
 
         var fakeStore = {
             clear: doNothing,
-            fetch: function (){ return 'John';}, //doNothing,
+            fetch: function() { return "John"; }, //doNothing,
             save: doNothing
         };
 
@@ -29,13 +29,13 @@
             return window.testFn($, ko, datacontext, fakeRouter, filter, sort, group, utils, config, eventDelegates, fakeMessenger, fakeStore);
         };
 
-        module('favorites viewmodel tests');
+        module("favorites viewmodel tests");
 
-        asyncTest('Filter viewmodel by Title',
-            function () {
+        asyncTest("Filter viewmodel by Title",
+            function() {
                 //ARRANGE
                 var vmFavorites = findVm(),
-                    routeData = { date: '05-19-2013' };
+                    routeData = { date: "05-19-2013" };
 
                 //store subscriptions in array
                 var subscription;
@@ -56,46 +56,45 @@
                 };
 
                 $.when(
-                    datacontext.rooms.getData({ results: data.rooms }),
-                    datacontext.timeslots.getData({ results: data.timeslots }),
-                    datacontext.tracks.getData({ results: data.tracks }),
-                    datacontext.attendance.getData({ param: config.currentUserId, results: data.attendance }),
-                    datacontext.persons.getSpeakers({ results: data.persons }),
-                    datacontext.sessions.getData({ results: data.sessions }),
-                    datacontext.persons.getFullPersonById(config.currentUserId,
+                        datacontext.rooms.getData({ results: data.rooms }),
+                        datacontext.timeslots.getData({ results: data.timeslots }),
+                        datacontext.tracks.getData({ results: data.tracks }),
+                        datacontext.attendance.getData({ param: config.currentUserId, results: data.attendance }),
+                        datacontext.persons.getSpeakers({ results: data.persons }),
+                        datacontext.sessions.getData({ results: data.sessions }),
+                        datacontext.persons.getFullPersonById(config.currentUserId,
                         {
-                            success: function (person) {
+                            success: function(person) {
                                 config.currentUser(person);
                             }
                         }, true)
-                )
+                    )
+                    .pipe(function() {
+                        //ACT
+                        var performTest = function(val) {
+                            vmFavorites.activate(routeData, function() {
 
-                .pipe(function () {
-                    //ACT
-                    var performTest = function(val) {
-                        vmFavorites.activate(routeData, function() {
+                                var sessions = vmFavorites.sessions();
 
-                            var sessions = vmFavorites.sessions();
+                                //ASSERT
+                                var onlySPA = _.all(sessions, function(item) {
+                                    return item.title().indexOf("Single Page App") > -1;
+                                });
 
-                            //ASSERT
-                            var onlySPA = _.all(sessions, function(item) {
-                                return item.title().indexOf('Single Page App') > -1;
+                                ok(onlySPA, "Filtered properly");
+
+                                // RESET
+                                subscription.dispose();
+
+                                start();
                             });
+                        };
 
-                            ok(onlySPA, 'Filtered properly');
+                        subscription = vmFavorites.sessionFilter.searchText.subscribe(performTest);
 
-                            // RESET
-                            subscription.dispose(); 
+                        vmFavorites.sessionFilter.searchText("Single Page App");
 
-                            start();
-                        });
-                    };
-
-                    subscription = vmFavorites.sessionFilter.searchText.subscribe(performTest);
-
-                    vmFavorites.sessionFilter.searchText('Single Page App');
-
-                });
+                    });
             }
         );
 

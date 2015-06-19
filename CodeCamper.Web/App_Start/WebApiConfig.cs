@@ -26,10 +26,8 @@ namespace CodeCamper.Web
             // ex: api/sessionbriefs
             // ex: api/sessions
             // ex: api/persons
-            routes.MapHttpRoute(
-                name: ControllerOnly,
-                routeTemplate: "api/{controller}"
-            );
+            routes.MapHttpRoute(ControllerOnly, "api/{controller}"
+                );
 
             // This is the default route that a "File | New MVC 4 " project creates.
             // (I changed the name, removed the defaults, and added the constraints)
@@ -42,12 +40,10 @@ namespace CodeCamper.Web
             //
             //  ex: api/sessions/1
             //  ex: api/persons/1
-            routes.MapHttpRoute(
-                name: ControllerAndId,
-                routeTemplate: "api/{controller}/{id}",
-                defaults: null, //defaults: new { id = RouteParameter.Optional } //,
-                constraints: new { id = @"^\d+$" } // id must be all digits
-            );
+            routes.MapHttpRoute(ControllerAndId, "api/{controller}/{id}", null,
+                //defaults: new { id = RouteParameter.Optional } //,
+                new {id = @"^\d+$"} // id must be all digits
+                );
 
             /********************************************************
             * The integer id constraint is necessary to distinguish 
@@ -63,10 +59,8 @@ namespace CodeCamper.Web
             //
             // ex: api/lookups/all
             // ex: api/lookups/rooms
-            routes.MapHttpRoute(
-                name: ControllerAction,
-                routeTemplate: "api/{controller}/{action}"
-            );
+            routes.MapHttpRoute(ControllerAction, "api/{controller}/{action}"
+                );
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿define(
-    'vm-sessions-tests-function',
-    ['jquery', 'underscore', 'ko', 'datacontext', 'router', 'filter.sessions', 'sort', 'utils', 'config', 'event.delegates'],
-    function ($, _, ko, datacontext, router, filter, sort, utils, config, eventDelegates) {
+    "vm-sessions-tests-function",
+    ["jquery", "underscore", "ko", "datacontext", "router", "filter.sessions", "sort", "utils", "config", "event.delegates"],
+    function($, _, ko, datacontext, router, filter, sort, utils, config, eventDelegates) {
 
-        var doNothing = function(){};
+        var doNothing = function() {};
 
         config.useMocks(true); // this helps me NOT mock datacontext
         config.currentUserId = 3;
@@ -21,21 +21,21 @@
 
         var fakeStore = {
             clear: doNothing,
-            fetch: function (){ return 'John';}, //doNothing,
+            fetch: function() { return "John"; }, //doNothing,
             save: doNothing
         };
 
         var findVm = function() {
             return window.testFn($, _, ko, datacontext, fakeRouter, filter, sort, eventDelegates, utils, fakeMessenger, config, fakeStore);
-            };
+        };
 
-        module('Sessions viewmodel tests');
+        module("Sessions viewmodel tests");
 
-        asyncTest('Activate viewmodel and has sessions',
+        asyncTest("Activate viewmodel and has sessions",
             function() {
                 //ARRANGE
                 var vmSessions = findVm(),
-                    routeData = { };
+                    routeData = {};
 
                 var data = {
                     rooms: ko.observable(),
@@ -47,39 +47,37 @@
                 };
 
                 $.when(
-                    datacontext.rooms.getData({ results: data.rooms }),
-                    datacontext.timeslots.getData({ results: data.timeslots }),
-                    datacontext.tracks.getData({ results: data.tracks }),
-                    datacontext.attendance.getData({ param: config.currentUserId, results: data.attendance }),
-                    datacontext.persons.getSpeakers({ results: data.persons }),
-                    datacontext.sessions.getData({ results: data.sessions }),
-                    datacontext.persons.getFullPersonById(config.currentUserId,
+                        datacontext.rooms.getData({ results: data.rooms }),
+                        datacontext.timeslots.getData({ results: data.timeslots }),
+                        datacontext.tracks.getData({ results: data.tracks }),
+                        datacontext.attendance.getData({ param: config.currentUserId, results: data.attendance }),
+                        datacontext.persons.getSpeakers({ results: data.persons }),
+                        datacontext.sessions.getData({ results: data.sessions }),
+                        datacontext.persons.getFullPersonById(config.currentUserId,
                         {
-                            success: function (person) {
+                            success: function(person) {
                                 config.currentUser(person);
                             }
                         }, true)
-                )
-
-                .pipe(function () {
-                    //ACT
-                    vmSessions.activate(routeData, function () {
-                        //ASSERT
-                        ok(vmSessions.sessions().length > 0, 'Sessions exist');
+                    )
+                    .pipe(function() {
+                        //ACT
+                        vmSessions.activate(routeData, function() {
+                            //ASSERT
+                            ok(vmSessions.sessions().length > 0, "Sessions exist");
+                        });
+                    })
+                    .always(function() {
+                        start();
                     });
-                })
-                
-                .always(function () {
-                    start();
-                });
             }
         );
 
-        asyncTest('Filter viewmodel by Title',
-            function () {
+        asyncTest("Filter viewmodel by Title",
+            function() {
                 //ARRANGE
                 var vmSessions = findVm(),
-                    routeData = { };
+                    routeData = {};
 
                 //store subscriptions in array
                 var subscription;
@@ -100,47 +98,46 @@
                 };
 
                 $.when(
-                    datacontext.rooms.getData({ results: data.rooms }),
-                    datacontext.timeslots.getData({ results: data.timeslots }),
-                    datacontext.tracks.getData({ results: data.tracks }),
-                    datacontext.attendance.getData({ param: config.currentUserId, results: data.attendance }),
-                    datacontext.persons.getSpeakers({ results: data.persons }),
-                    datacontext.sessions.getData({ results: data.sessions }),
-                    datacontext.persons.getFullPersonById(config.currentUserId,
+                        datacontext.rooms.getData({ results: data.rooms }),
+                        datacontext.timeslots.getData({ results: data.timeslots }),
+                        datacontext.tracks.getData({ results: data.tracks }),
+                        datacontext.attendance.getData({ param: config.currentUserId, results: data.attendance }),
+                        datacontext.persons.getSpeakers({ results: data.persons }),
+                        datacontext.sessions.getData({ results: data.sessions }),
+                        datacontext.persons.getFullPersonById(config.currentUserId,
                         {
-                            success: function (person) {
+                            success: function(person) {
                                 config.currentUser(person);
                             }
                         }, true)
-                )
+                    )
+                    .pipe(function() {
 
-                .pipe(function () {
+                        //ACT
+                        var performTest = function(val) {
+                            vmSessions.activate(routeData, function() {
 
-                    //ACT
-                    var performTest = function(val) {
-                        vmSessions.activate(routeData, function() {
+                                var sessions = vmSessions.sessions();
 
-                            var sessions = vmSessions.sessions();
+                                //ASSERT
+                                var onlySPA = _.all(sessions, function(item) {
+                                    return item.title().indexOf("Single Page App") > -1;
+                                });
 
-                            //ASSERT
-                            var onlySPA = _.all(sessions, function(item) {
-                                return item.title().indexOf('Single Page App') > -1;
+                                ok(onlySPA, "Filtered properly");
+
+                                // RESET
+                                subscription.dispose();
+
+                                start();
                             });
+                        };
 
-                            ok(onlySPA, 'Filtered properly');
+                        subscription = vmSessions.sessionFilter.searchText.subscribe(performTest);
 
-                            // RESET
-                            subscription.dispose(); 
+                        vmSessions.sessionFilter.searchText("Single Page App");
 
-                            start();
-                        });
-                    };
-
-                    subscription = vmSessions.sessionFilter.searchText.subscribe(performTest);
-
-                    vmSessions.sessionFilter.searchText('Single Page App');
-
-                });
+                    });
             }
         );
 

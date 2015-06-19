@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CodeCamper.Data.SampleData
 {
@@ -8,123 +9,11 @@ namespace CodeCamper.Data.SampleData
         {
             Male,
             Female,
-            Both,
+            Both
         }
 
-        public class Name
+        public static string[] FemaleFirstNames =
         {
-            public Name()
-            {
-                Gender = "M"; // generated techie person is probably male
-            }
-            public string First { get; set; }
-            public string Last { get; set; }
-            public string Gender { get; set; }
-        }
-
-        public static IEnumerable<Name> GetRandomNames(int count, NameGender nameGender = NameGender.Both)
-        {
-            var enumerator = RandomNameEnumerator(nameGender);
-            while (count-- > 0)
-            {
-                enumerator.MoveNext();
-                yield return enumerator.Current;
-            }
-        }
-
-        // ReSharper disable FunctionNeverReturns
-        // These are enumerators that keep yielding values as long as you ask for them
-        // They never stop returning names; a caller pulls the number of names that it needs.
-
-        public static IEnumerator<Name> RandomNameEnumerator(NameGender nameGender = NameGender.Both)
-        {
-            // If NameGender.Both, alternate between male and female names
-            var isMaleA = nameGender == NameGender.Both || nameGender == NameGender.Male;
-            var isMaleB = nameGender == NameGender.Male;
-
-            var genderA = isMaleA ? "M" : "F";
-            var firstNameEnumeratorA = 
-                RandomFirstNameEnumerator((isMaleA) ? NameGender.Male : NameGender.Female);
-
-            var genderB = isMaleB ? "M" : "F";
-            var firstNameEnumeratorB =
-                RandomFirstNameEnumerator((isMaleB) ? NameGender.Male : NameGender.Female);
-
-            var lastNameEnumerator = RandomLastNameEnumerator();
-
-            while (true)
-            {
-                firstNameEnumeratorA.MoveNext();
-                lastNameEnumerator.MoveNext();
-                yield return new Name
-                    {
-                        First = firstNameEnumeratorA.Current, 
-                        Last = lastNameEnumerator.Current,
-                        Gender = genderA,
-                    };
-
-                firstNameEnumeratorB.MoveNext();
-                lastNameEnumerator.MoveNext();
-                yield return new Name
-                    {
-                        First = firstNameEnumeratorB.Current,
-                        Last = lastNameEnumerator.Current,
-                        Gender = genderB,
-                    };
-            }
-
-        }
-
-        public static IEnumerable<string> GetRandomLastNames(int count)
-        {
-            var enumerator = RandomLastNameEnumerator();
-            while (count-- > 0)
-            {
-                enumerator.MoveNext();
-                yield return enumerator.Current;
-            }
-        }
-
-        public static IEnumerator<string> RandomLastNameEnumerator()
-        {
-            var max = Surnames.Length;
-            var rand = new System.Random();
-
-            while (true)
-            {
-                yield return Surnames[rand.Next(0, max)];
-            }
-        }
-
-        public static IEnumerable<string> GetRandomFirstNames(int count, NameGender nameGender = NameGender.Both)
-        {
-            var enumerator = RandomFirstNameEnumerator(nameGender);
-            while (count-- > 0)
-            {
-                enumerator.MoveNext();
-                yield return enumerator.Current;
-            }
-        }
-
-        public static IEnumerator<string> RandomFirstNameEnumerator(NameGender nameGender = NameGender.Both)
-        {
-            var maleMax = MaleFirstNames.Length;
-            var femaleMax = FemaleFirstNames.Length;
-            var rand = new System.Random();
-
-            while (true)
-            {
-                if (nameGender == NameGender.Male || nameGender == NameGender.Both )
-                    yield return MaleFirstNames[rand.Next(0, maleMax)];
-
-                if (nameGender == NameGender.Female || nameGender == NameGender.Both)
-                    yield return FemaleFirstNames[rand.Next(0, femaleMax)];
-            } 
-        }
-        // ReSharper restore FunctionNeverReturns
-
-        public static string[] FemaleFirstNames = new[] 
-        {                                            
             "Isabella",
             "Sophia",
             "Emma",
@@ -226,8 +115,8 @@ namespace CodeCamper.Data.SampleData
             "Paige"
         };
 
-        public static string[] MaleFirstNames = new[] 
-        { 
+        public static string[] MaleFirstNames =
+        {
             "Jacob",
             "Ethan",
             "Michael",
@@ -330,7 +219,7 @@ namespace CodeCamper.Data.SampleData
             "Brian"
         };
 
-        public static string[] Surnames = new[]
+        public static string[] Surnames =
         {
             "Smith",
             "Johnson",
@@ -433,5 +322,118 @@ namespace CodeCamper.Data.SampleData
             "Diaz",
             "Hayes"
         };
+
+        public static IEnumerable<Name> GetRandomNames(int count, NameGender nameGender = NameGender.Both)
+        {
+            var enumerator = RandomNameEnumerator(nameGender);
+            while (count-- > 0)
+            {
+                enumerator.MoveNext();
+                yield return enumerator.Current;
+            }
+        }
+
+        public class Name
+        {
+            public Name()
+            {
+                Gender = "M"; // generated techie person is probably male
+            }
+
+            public string First { get; set; }
+            public string Last { get; set; }
+            public string Gender { get; set; }
+        }
+
+        // ReSharper disable FunctionNeverReturns
+        // These are enumerators that keep yielding values as long as you ask for them
+        // They never stop returning names; a caller pulls the number of names that it needs.
+
+        public static IEnumerator<Name> RandomNameEnumerator(NameGender nameGender = NameGender.Both)
+        {
+            // If NameGender.Both, alternate between male and female names
+            var isMaleA = nameGender == NameGender.Both || nameGender == NameGender.Male;
+            var isMaleB = nameGender == NameGender.Male;
+
+            var genderA = isMaleA ? "M" : "F";
+            var firstNameEnumeratorA =
+                RandomFirstNameEnumerator((isMaleA) ? NameGender.Male : NameGender.Female);
+
+            var genderB = isMaleB ? "M" : "F";
+            var firstNameEnumeratorB =
+                RandomFirstNameEnumerator((isMaleB) ? NameGender.Male : NameGender.Female);
+
+            var lastNameEnumerator = RandomLastNameEnumerator();
+
+            while (true)
+            {
+                firstNameEnumeratorA.MoveNext();
+                lastNameEnumerator.MoveNext();
+                yield return new Name
+                {
+                    First = firstNameEnumeratorA.Current,
+                    Last = lastNameEnumerator.Current,
+                    Gender = genderA
+                };
+
+                firstNameEnumeratorB.MoveNext();
+                lastNameEnumerator.MoveNext();
+                yield return new Name
+                {
+                    First = firstNameEnumeratorB.Current,
+                    Last = lastNameEnumerator.Current,
+                    Gender = genderB
+                };
+            }
+        }
+
+        public static IEnumerable<string> GetRandomLastNames(int count)
+        {
+            var enumerator = RandomLastNameEnumerator();
+            while (count-- > 0)
+            {
+                enumerator.MoveNext();
+                yield return enumerator.Current;
+            }
+        }
+
+        public static IEnumerator<string> RandomLastNameEnumerator()
+        {
+            var max = Surnames.Length;
+            var rand = new Random();
+
+            while (true)
+            {
+                yield return Surnames[rand.Next(0, max)];
+            }
+        }
+
+        public static IEnumerable<string> GetRandomFirstNames(int count, NameGender nameGender = NameGender.Both)
+        {
+            var enumerator = RandomFirstNameEnumerator(nameGender);
+            while (count-- > 0)
+            {
+                enumerator.MoveNext();
+                yield return enumerator.Current;
+            }
+        }
+
+        public static IEnumerator<string> RandomFirstNameEnumerator(NameGender nameGender = NameGender.Both)
+        {
+            var maleMax = MaleFirstNames.Length;
+            var femaleMax = FemaleFirstNames.Length;
+            var rand = new Random();
+
+            while (true)
+            {
+                if (nameGender == NameGender.Male || nameGender == NameGender.Both)
+                    yield return MaleFirstNames[rand.Next(0, maleMax)];
+
+                if (nameGender == NameGender.Female || nameGender == NameGender.Both)
+                    yield return FemaleFirstNames[rand.Next(0, femaleMax)];
+            }
+        }
+
+        // ReSharper restore FunctionNeverReturns
     }
 }

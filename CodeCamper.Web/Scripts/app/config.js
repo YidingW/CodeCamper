@@ -1,83 +1,82 @@
-﻿define('config',
-    ['toastr', 'mock/mock', 'infuser', 'ko'],
-    function (toastr, mock, infuser, ko) {
+﻿define("config",
+    ["toastr", "mock/mock", "infuser", "ko"],
+    function(toastr, mock, infuser, ko) {
 
         var
             // properties
             //-----------------
-            
             currentUserId = 3, // John Papa 
             currentUser = ko.observable(),
             hashes = {
-                favorites: '#/favorites',
-                favoritesByDate: '#/favorites/date',
-                sessions: '#/sessions',
-                speakers: '#/speakers'
+                favorites: "#/favorites",
+                favoritesByDate: "#/favorites/date",
+                sessions: "#/sessions",
+                speakers: "#/speakers"
             },
             logger = toastr, // use toastr for the logger
             messages = {
-                viewModelActivated: 'viewmodel-activation'
+                viewModelActivated: "viewmodel-activation"
             },
             stateKeys = {
-                lastView: 'state.active-hash'
+                lastView: "state.active-hash"
             },
             storeExpirationMs = (1000 * 60 * 60 * 24), // 1 day
             //storeExpirationMs = (1000 * 5), // 5 seconds
             throttle = 400,
-            title = 'CodeCamper > ',
+            title = "CodeCamper > ",
             toastrTimeout = 2000,
 
             _useMocks = false, // Set this to toggle mocks
-            useMocks = function (val) {
-                if(val) {
+            useMocks = function(val) {
+                if (val) {
                     _useMocks = val;
                     init();
                 }
                 return _useMocks;
             },
-            
+
             viewIds = {
-                favorites: '#favorites-view',
-                session: '#session-view',
-                sessions: '#sessions-view',
-                shellTop: '#shellTop-view',
-                speaker: '#speaker-view',
-                speakers: '#speakers-view'
+                favorites: "#favorites-view",
+                session: "#session-view",
+                sessions: "#sessions-view",
+                shellTop: "#shellTop-view",
+                speaker: "#speaker-view",
+                speakers: "#speakers-view"
             },
-            
+
             toasts = {
-                changesPending: 'Please save or cancel your changes before leaving the page.',
-                errorSavingData: 'Data could not be saved. Please check the logs.',
-                errorGettingData: 'Could not retrieve data.  Please check the logs.',
-                invalidRoute: 'Cannot navigate. Invalid route',
-                retreivedData: 'Data retrieved successfully',
-                savedData: 'Data saved successfully'
+                changesPending: "Please save or cancel your changes before leaving the page.",
+                errorSavingData: "Data could not be saved. Please check the logs.",
+                errorGettingData: "Could not retrieve data.  Please check the logs.",
+                invalidRoute: "Cannot navigate. Invalid route",
+                retreivedData: "Data retrieved successfully",
+                savedData: "Data saved successfully"
             },
 
             // methods
             //-----------------
 
-            dataserviceInit = function () { },
+            dataserviceInit = function() {},
 
-            validationInit = function () {
+            validationInit = function() {
                 ko.validation.configure({
-                    registerExtenders: true,    //default is true
-                    messagesOnModified: true,   //default is true
-                    insertMessages: true,       //default is true
+                    registerExtenders: true, //default is true
+                    messagesOnModified: true, //default is true
+                    insertMessages: true, //default is true
                     parseInputAttributes: true, //default is false
                     writeInputAttributes: true, //default is false
-                    messageTemplate: null,      //default is null
-                    decorateElement: true       //default is false. Applies the .validationElement CSS class
+                    messageTemplate: null, //default is null
+                    decorateElement: true //default is false. Applies the .validationElement CSS class
                 });
             },
 
-            configureExternalTemplates = function () {
+            configureExternalTemplates = function() {
                 infuser.defaults.templatePrefix = "_";
                 infuser.defaults.templateSuffix = ".tmpl.html";
                 infuser.defaults.templateUrl = "/Tmpl";
             },
 
-            init = function () {
+            init = function() {
                 if (_useMocks) {
                     dataserviceInit = mock.dataserviceInit;
                 }

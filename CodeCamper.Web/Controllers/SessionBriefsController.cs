@@ -12,16 +12,18 @@ namespace CodeCamper.Web.Controllers
             Uow = uow;
         }
 
-        #region OData Future: IQueryable<T>
-        //[Queryable]
-        // public IQueryable<SessionBrief> Get()
-        #endregion
-
         // GET /api/sessionbriefs
         public IEnumerable<SessionBrief> Get()
         {
             return Uow.Sessions.GetSessionBriefs()
                 .OrderBy(sb => sb.TimeSlotId);
         }
+
+        #region OData Future: IQueryable<T>
+
+        //[Queryable]
+        // public IQueryable<SessionBrief> Get()
+
+        #endregion
     }
 }

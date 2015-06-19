@@ -1,15 +1,15 @@
-﻿define('utils',
-['underscore', 'moment'],
-    function (_, moment) {
+﻿define("utils",
+    ["underscore", "moment"],
+    function(_, moment) {
         var
-            endOfDay = function (day) {
+            endOfDay = function(day) {
                 return moment(new Date(day))
-                    .add('days', 1)
-                    .add('seconds', -1)
+                    .add("days", 1)
+                    .add("seconds", -1)
                     .toDate();
             },
-            getFirstTimeslot = function (timeslots) {
-                return moment(timeslots()[0].start()).format('MM-DD-YYYY');
+            getFirstTimeslot = function(timeslots) {
+                return moment(timeslots()[0].start()).format("MM-DD-YYYY");
             },
             hasProperties = function(obj) {
                 for (var prop in obj) {
@@ -19,12 +19,12 @@
                 }
                 return false;
             },
-            invokeFunctionIfExists = function (callback) {
+            invokeFunctionIfExists = function(callback) {
                 if (_.isFunction(callback)) {
                     callback();
                 }
             },
-            mapMemoToArray = function (items) {
+            mapMemoToArray = function(items) {
                 var underlyingArray = [];
                 for (var prop in items) {
                     if (items.hasOwnProperty(prop)) {
@@ -38,7 +38,7 @@
                 return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
             },
 
-            restoreFilter = function (filterData) {
+            restoreFilter = function(filterData) {
                 var stored = filterData.stored,
                     filter = filterData.filter,
                     dc = filterData.datacontext;
@@ -53,7 +53,7 @@
                 ];
 
                 // For each filter, set the filter to the stored value, or get it from the DC
-                _.each(filterList, function (map) {
+                _.each(filterList, function(map) {
                     var rawProperty = map.raw, // POJO
                         filterProperty = map.filter, // observable
                         fetchMethod = map.fetch;
@@ -80,4 +80,3 @@
             restoreFilter: restoreFilter
         };
     });
-

@@ -1,13 +1,13 @@
-﻿define('model',
+﻿define("model",
     [
-        'model.attendance',
-        'model.person',
-        'model.room',
-        'model.session',
-        'model.timeslot',
-        'model.track'
+        "model.attendance",
+        "model.person",
+        "model.room",
+        "model.session",
+        "model.timeslot",
+        "model.track"
     ],
-    function (attendance, person, room, session, timeslot, track) {
+    function(attendance, person, room, session, timeslot, track) {
         var
             model = {
                 Attendance: attendance,
@@ -18,7 +18,7 @@
                 Track: track
             };
 
-        model.setDataContext = function (dc) {
+        model.setDataContext = function(dc) {
             // Model's that have navigation properties 
             // need a reference to the datacontext.
             model.Attendance.datacontext(dc);

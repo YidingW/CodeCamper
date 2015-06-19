@@ -1,6 +1,6 @@
-﻿define('model.mapper',
-['model'],
-    function (model) {
+﻿define("model.mapper",
+    ["model"],
+    function(model) {
         var
             attendance = {
                 getDtoId: function(dto) {
@@ -15,7 +15,7 @@
                     return item;
                 }
             },
-        
+
             room = {
                 getDtoId: function(dto) { return dto.id; },
                 fromDto: function(dto, item) {
@@ -23,7 +23,7 @@
                     return item.name(dto.name);
                 }
             },
-        
+
             session = {
                 getDtoId: function(dto) { return dto.id; },
                 fromDto: function(dto, item) {
@@ -43,7 +43,7 @@
                     return item;
                 }
             },
-        
+
             person = {
                 getDtoId: function(dto) { return dto.id; },
                 fromDto: function(dto, item) {
@@ -61,7 +61,7 @@
                     return item;
                 }
             },
-        
+
             timeSlot = {
                 getDtoId: function(dto) { return dto.id; },
                 fromDto: function(dto, item) {
@@ -71,10 +71,10 @@
                         .duration(dto.duration);
                 }
             },
-        
+
             track = {
-                getDtoId: function (dto) { return dto.id; },
-                fromDto: function (dto, item) {
+                getDtoId: function(dto) { return dto.id; },
+                fromDto: function(dto, item) {
                     item = item || new model.Track().id(dto.id);
                     return item.name(dto.name);
                 }

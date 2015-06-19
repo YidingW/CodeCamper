@@ -9,7 +9,7 @@ namespace CodeCamper.Web
             // Force optimization to be on or off, regardless of web.config setting
             //BundleTable.EnableOptimizations = false;
             bundles.UseCdn = false;
-       
+
             // .debug.js, -vsdoc.js and .intellisense.js files 
             // are in BundleTable.Bundles.IgnoreList by default.
             // Clear out the list and add back the ones we want to ignore.
@@ -23,7 +23,7 @@ namespace CodeCamper.Web
                 .Include("~/Scripts/lib/modernizr-{version}.js"));
 
             // jQuery
-            bundles.Add(new ScriptBundle("~/bundles/jquery", 
+            bundles.Add(new ScriptBundle("~/bundles/jquery",
                 "//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
                 .Include("~/Scripts/lib/jquery-{version}.js"));
 
@@ -46,20 +46,20 @@ namespace CodeCamper.Web
                     "~/Scripts/lib/knockout.dirtyFlag.js",
                     "~/Scripts/lib/knockout.validation.js",
                     "~/Scripts/lib/koExternalTemplateEngine.js",
-                    
+
                     // Other 3rd party libraries
                     "~/Scripts/lib/underscore.js",
                     "~/Scripts/lib/moment.js",
                     "~/Scripts/lib/sammy-{version}.js",
                     "~/Scripts/lib/amplify.*",
                     "~/Scripts/lib/toastr.js"
-                    ));
+                ));
             bundles.Add(new ScriptBundle("~/bundles/jsmocks")
-                .IncludeDirectory("~/Scripts/app/mock", "*.js", searchSubdirectories: false));
+                .IncludeDirectory("~/Scripts/app/mock", "*.js", false));
 
             // All application JS files (except mocks)
             bundles.Add(new ScriptBundle("~/bundles/jsapplibs")
-                .IncludeDirectory("~/Scripts/app/", "*.js", searchSubdirectories: false));
+                .IncludeDirectory("~/Scripts/app/", "*.js", false));
 
             // 3rd Party CSS files
             bundles.Add(new StyleBundle("~/Content/css").Include(

@@ -1,16 +1,16 @@
-﻿define('bootstrapper',
-    ['jquery', 'config', 'route-config', 'presenter', 'dataprimer', 'binder'],
-    function ($, config, routeConfig, presenter, dataprimer, binder) {
+﻿define("bootstrapper",
+    ["jquery", "config", "route-config", "presenter", "dataprimer", "binder"],
+    function($, config, routeConfig, presenter, dataprimer, binder) {
         var
-            run = function () {
+            run = function() {
                 presenter.toggleActivity(true);
 
-                config.dataserviceInit(); 
-                
+                config.dataserviceInit();
+
                 $.when(dataprimer.fetch())
                     .done(binder.bind)
                     .done(routeConfig.register)
-                    .always(function () {
+                    .always(function() {
                         presenter.toggleActivity(false);
                     });
             };

@@ -1,33 +1,33 @@
-﻿define('router',
-    ['jquery', 'underscore', 'sammy', 'presenter', 'config', 'route-mediator', 'store'],
-    function ($, _, Sammy, presenter, config, routeMediator, store) {
+﻿define("router",
+    ["jquery", "underscore", "sammy", "presenter", "config", "route-mediator", "store"],
+    function($, _, Sammy, presenter, config, routeMediator, store) {
         var
-            currentHash = '',
-            defaultRoute = '',
+            currentHash = "",
+            defaultRoute = "",
             isRedirecting = false,
             logger = config.logger,
-            startupUrl = '',
+            startupUrl = "",
             window = config.window,
 
-            sammy = new Sammy.Application(function () {
+            sammy = new Sammy.Application(function() {
                 if (Sammy.Title) {
                     this.use(Sammy.Title);
                     this.setTitle(config.title);
                 }
             }),
 
-            navigateBack = function () {
+            navigateBack = function() {
                 window.history.back();
             },
 
-            navigateTo = function (url) {
+            navigateTo = function(url) {
                 sammy.setLocation(url);
             },
 
-            register = function (options) {
+            register = function(options) {
                 if (options.routes) {
                     // Register a list of routes
-                    _.each(options.routes, function (route) {
+                    _.each(options.routes, function(route) {
                         registerRoute({
                             route: route.route,
                             title: route.title,
@@ -44,8 +44,8 @@
                 registerRoute(options);
             },
 
-            registerBeforeLeaving = function () {
-                sammy.before(/.*/, function () {
+            registerBeforeLeaving = function() {
+                sammy.before(/.*/, function() {
                     var
                         context = this,
                         response = routeMediator.canLeave();
@@ -55,8 +55,7 @@
                         logger.warning(response.message);
                         // Keep hash url the same in address bar
                         context.app.setLocation(currentHash);
-                    }
-                    else {
+                    } else {
                         isRedirecting = false;
                         currentHash = context.app.getLocation();
                     }
@@ -65,25 +64,25 @@
                 });
             },
 
-            registerRoute = function (options) {
+            registerRoute = function(options) {
                 if (!options.callback) {
-                    throw Error('callback must be specified.');
+                    throw Error("callback must be specified.");
                 }
 
                 if (options.isDefault) {
                     defaultRoute = options.route;
-                    setupGet(options, '/');
+                    setupGet(options, "/");
                 }
 
                 setupGet(options);
             },
-            
-            setupGet = function (options, routeOverride) {
+
+            setupGet = function(options, routeOverride) {
                 var route = routeOverride || options.route;
-                sammy.get(route, function (context) { //context is 'this'
+                sammy.get(route, function(context) { //context is 'this'
                     store.save(config.stateKeys.lastView, context.path);
                     options.callback(context.params); // Activate the viewmodel
-                    $('.view').hide();
+                    $(".view").hide();
                     presenter.transitionTo(
                         $(options.view),
                         options.route, //context.path, // We want to find the route we defined in the config
@@ -94,12 +93,12 @@
                     }
                 });
             },
-            
-            getUsableRoute = function (value) {
-                return value && value.indexOf('/#') != -1 ? value : null;
+
+            getUsableRoute = function(value) {
+                return value && value.indexOf("/#") != -1 ? value : null;
             },
 
-            run = function () {
+            run = function() {
                 var url = store.fetch(config.stateKeys.lastView);
 
                 // 1) if i browse to a location, use it
@@ -107,11 +106,11 @@
                 // 3) otherwise use the default route
                 var addressBarUrl = sammy.getLocation();
                 startupUrl = getUsableRoute(addressBarUrl) || getUsableRoute(url) || defaultRoute;
-                
+
                 sammy.run();
                 registerBeforeLeaving();
                 navigateTo(startupUrl);
-           };
+            };
 
         return {
             navigateBack: navigateBack,

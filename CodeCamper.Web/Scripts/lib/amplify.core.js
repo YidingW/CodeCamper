@@ -7,96 +7,96 @@
  * 
  * http://amplifyjs.com
  */
-(function( global, undefined ) {
+(function(global, undefined) {
 
-var slice = [].slice,
-	subscriptions = {};
+    var slice = [].slice,
+        subscriptions = {};
 
-var amplify = global.amplify = {
-	publish: function( topic ) {
-		var args = slice.call( arguments, 1 ),
-			topicSubscriptions,
-			subscription,
-			length,
-			i = 0,
-			ret;
+    var amplify = global.amplify = {
+        publish: function(topic) {
+            var args = slice.call(arguments, 1),
+                topicSubscriptions,
+                subscription,
+                length,
+                i = 0,
+                ret;
 
-		if ( !subscriptions[ topic ] ) {
-			return true;
-		}
+            if (!subscriptions[topic]) {
+                return true;
+            }
 
-		topicSubscriptions = subscriptions[ topic ].slice();
-		for ( length = topicSubscriptions.length; i < length; i++ ) {
-			subscription = topicSubscriptions[ i ];
-			ret = subscription.callback.apply( subscription.context, args );
-			if ( ret === false ) {
-				break;
-			}
-		}
-		return ret !== false;
-	},
+            topicSubscriptions = subscriptions[topic].slice();
+            for (length = topicSubscriptions.length; i < length; i++) {
+                subscription = topicSubscriptions[i];
+                ret = subscription.callback.apply(subscription.context, args);
+                if (ret === false) {
+                    break;
+                }
+            }
+            return ret !== false;
+        },
 
-	subscribe: function( topic, context, callback, priority ) {
-		if ( arguments.length === 3 && typeof callback === "number" ) {
-			priority = callback;
-			callback = context;
-			context = null;
-		}
-		if ( arguments.length === 2 ) {
-			callback = context;
-			context = null;
-		}
-		priority = priority || 10;
+        subscribe: function(topic, context, callback, priority) {
+            if (arguments.length === 3 && typeof callback === "number") {
+                priority = callback;
+                callback = context;
+                context = null;
+            }
+            if (arguments.length === 2) {
+                callback = context;
+                context = null;
+            }
+            priority = priority || 10;
 
-		var topicIndex = 0,
-			topics = topic.split( /\s/ ),
-			topicLength = topics.length,
-			added;
-		for ( ; topicIndex < topicLength; topicIndex++ ) {
-			topic = topics[ topicIndex ];
-			added = false;
-			if ( !subscriptions[ topic ] ) {
-				subscriptions[ topic ] = [];
-			}
-	
-			var i = subscriptions[ topic ].length - 1,
-				subscriptionInfo = {
-					callback: callback,
-					context: context,
-					priority: priority
-				};
-	
-			for ( ; i >= 0; i-- ) {
-				if ( subscriptions[ topic ][ i ].priority <= priority ) {
-					subscriptions[ topic ].splice( i + 1, 0, subscriptionInfo );
-					added = true;
-					break;
-				}
-			}
+            var topicIndex = 0,
+                topics = topic.split(/\s/),
+                topicLength = topics.length,
+                added;
+            for (; topicIndex < topicLength; topicIndex++) {
+                topic = topics[topicIndex];
+                added = false;
+                if (!subscriptions[topic]) {
+                    subscriptions[topic] = [];
+                }
 
-			if ( !added ) {
-				subscriptions[ topic ].unshift( subscriptionInfo );
-			}
-		}
+                var i = subscriptions[topic].length - 1,
+                    subscriptionInfo = {
+                        callback: callback,
+                        context: context,
+                        priority: priority
+                    };
 
-		return callback;
-	},
+                for (; i >= 0; i--) {
+                    if (subscriptions[topic][i].priority <= priority) {
+                        subscriptions[topic].splice(i + 1, 0, subscriptionInfo);
+                        added = true;
+                        break;
+                    }
+                }
 
-	unsubscribe: function( topic, callback ) {
-		if ( !subscriptions[ topic ] ) {
-			return;
-		}
+                if (!added) {
+                    subscriptions[topic].unshift(subscriptionInfo);
+                }
+            }
 
-		var length = subscriptions[ topic ].length,
-			i = 0;
+            return callback;
+        },
 
-		for ( ; i < length; i++ ) {
-			if ( subscriptions[ topic ][ i ].callback === callback ) {
-				subscriptions[ topic ].splice( i, 1 );
-				break;
-			}
-		}
-	}
-};
+        unsubscribe: function(topic, callback) {
+            if (!subscriptions[topic]) {
+                return;
+            }
 
-}( this ) );
+            var length = subscriptions[topic].length,
+                i = 0;
+
+            for (; i < length; i++) {
+                if (subscriptions[topic][i].callback === callback) {
+                    subscriptions[topic].splice(i, 1);
+                    break;
+                }
+            }
+        }
+    };
+
+}(this));

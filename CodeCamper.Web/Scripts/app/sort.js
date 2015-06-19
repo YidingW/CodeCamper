@@ -1,11 +1,11 @@
-﻿define('sort', [], function () {
+﻿define("sort", [], function() {
 
     var
-        roomSort = function (roomA, roomB) {
+        roomSort = function(roomA, roomB) {
             return roomA.name() > roomB.name() ? 1 : -1;
         },
 
-        sessionSort = function (sessionA, sessionB) {
+        sessionSort = function(sessionA, sessionB) {
             if (sessionA.timeslot().start() === sessionB.timeslot().start()) {
                 return sessionA.track().name() > sessionB.track().name() ? 1 : -1;
             } else {
@@ -13,19 +13,19 @@
             }
         },
 
-        speakerSort = function (speakerA, speakerB) {
+        speakerSort = function(speakerA, speakerB) {
             return speakerA.fullName() > speakerB.fullName() ? 1 : -1;
         },
-        
-        speakerSessionSort = function (sessionA, sessionB) {
+
+        speakerSessionSort = function(sessionA, sessionB) {
             return sessionA.title() > sessionB.title() ? 1 : -1;
         },
 
-        timeslotSort = function (slotA, slotB) {
+        timeslotSort = function(slotA, slotB) {
             return slotA.start() > slotB.start() ? 1 : -1;
         },
 
-        trackSort = function (trackA, trackB) {
+        trackSort = function(trackA, trackB) {
             return trackA.name() > trackB.name() ? 1 : -1;
         };
 

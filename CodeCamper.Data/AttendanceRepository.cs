@@ -8,7 +8,9 @@ namespace CodeCamper.Data
 {
     public class AttendanceRepository : EFRepository<Attendance>, IAttendanceRepository
     {
-        public AttendanceRepository(DbContext context) : base(context) { }
+        public AttendanceRepository(DbContext context) : base(context)
+        {
+        }
 
         public override Attendance GetById(int id)
         {

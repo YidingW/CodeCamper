@@ -1,19 +1,19 @@
-﻿define('vm.sessions',
-    ['jquery', 'underscore', 'ko', 'datacontext', 'router', 'filter.sessions', 'sort', 'event.delegates', 'utils', 'messenger', 'config', 'store'],
-    function ($, _, ko, datacontext, router, SessionFilter, sort, eventDelegates, utils, messenger, config, store) {
+﻿define("vm.sessions",
+    ["jquery", "underscore", "ko", "datacontext", "router", "filter.sessions", "sort", "event.delegates", "utils", "messenger", "config", "store"],
+    function($, _, ko, datacontext, router, SessionFilter, sort, eventDelegates, utils, messenger, config, store) {
         var
-            filterTemplate = 'sessions.filterbox',
+            filterTemplate = "sessions.filterbox",
             isBusy = false,
             isRefreshing = false,
             sessionFilter = new SessionFilter(),
-            sessionTemplate = 'sessions.view',
+            sessionTemplate = "sessions.view",
             sessions = ko.observableArray(),
             speakers = ko.observableArray(),
-            stateKey = { filter: 'vm.sessions.filter' },
+            stateKey = { filter: "vm.sessions.filter" },
             timeslots = ko.observableArray(),
             tracks = ko.observableArray(),
 
-            activate = function (routeData, callback) {
+            activate = function(routeData, callback) {
                 messenger.publish.viewModelActivated({ canleaveCallback: canLeave });
                 getSpeakers();
                 getTimeslots();
@@ -21,7 +21,7 @@
                 getSessions(callback);
             },
 
-            addFilterSubscriptions = function () {
+            addFilterSubscriptions = function() {
                 sessionFilter.searchText.subscribe(onFilterChange);
                 sessionFilter.speaker.subscribe(onFilterChange);
                 sessionFilter.timeslot.subscribe(onFilterChange);
@@ -29,21 +29,21 @@
                 sessionFilter.favoriteOnly.subscribe(onFilterChange);
             },
 
-            canLeave = function () {
+            canLeave = function() {
                 return true;
             },
 
-            clearAllFilters = function () {
+            clearAllFilters = function() {
                 sessionFilter.favoriteOnly(false).speaker(null)
-                    .timeslot(null).track(null).searchText('');
+                    .timeslot(null).track(null).searchText("");
                 getSessions();
             },
 
-            clearFilter = function () {
-                sessionFilter.searchText('');
+            clearFilter = function() {
+                sessionFilter.searchText("");
             },
-            
-            dataOptions = function (force) {
+
+            dataOptions = function(force) {
                 return {
                     results: sessions,
                     filter: sessionFilter,
@@ -53,24 +53,24 @@
             },
 
             forceRefreshCmd = ko.asyncCommand({
-                execute: function (complete) {
+                execute: function(complete) {
                     $.when(datacontext.sessions.getSessionsAndAttendance(dataOptions(true)))
                         .always(complete);
                 }
             }),
 
-            getSessions = function (callback) {
+            getSessions = function(callback) {
                 if (!isRefreshing) {
                     isRefreshing = true;
                     restoreFilter();
                     $.when(datacontext.sessions.getData(dataOptions(false)))
                         .always(utils.invokeFunctionIfExists(callback));
                     isRefreshing = false;
-                } 
-                
+                }
+
             },
 
-            getSpeakers = function () {
+            getSpeakers = function() {
                 if (!speakers().length) {
                     datacontext.speakerSessions.getLocalSpeakers(speakers, {
                         sortFunction: sort.speakerSort
@@ -78,7 +78,7 @@
                 }
             },
 
-            getTimeslots = function () {
+            getTimeslots = function() {
                 if (!timeslots().length) {
                     datacontext.timeslots.getData({
                         results: timeslots,
@@ -87,7 +87,7 @@
                 }
             },
 
-            getTracks = function () {
+            getTracks = function() {
                 if (!tracks().length) {
                     datacontext.tracks.getData({
                         results: tracks,
@@ -96,22 +96,24 @@
                 }
             },
 
-            gotoDetails = function (selectedSession) {
+            gotoDetails = function(selectedSession) {
                 if (selectedSession && selectedSession.id()) {
-                    router.navigateTo(config.hashes.sessions + '/' + selectedSession.id());
+                    router.navigateTo(config.hashes.sessions + "/" + selectedSession.id());
                 }
             },
 
-            onFilterChange = function () {
+            onFilterChange = function() {
                 if (!isRefreshing) {
                     store.save(stateKey.filter, ko.toJS(sessionFilter));
                     getSessions();
                 }
             },
 
-            restoreFilter = function () {
+            restoreFilter = function() {
                 var stored = store.fetch(stateKey.filter);
-                if (!stored) { return; }
+                if (!stored) {
+                    return;
+                }
                 utils.restoreFilter({
                     stored: stored,
                     filter: sessionFilter,
@@ -119,21 +121,23 @@
                 });
             },
 
-            saveFavorite = function (selectedSession) {
-                if (isBusy) { return; }
+            saveFavorite = function(selectedSession) {
+                if (isBusy) {
+                    return;
+                }
                 isBusy = true;
                 var cudMethod = selectedSession.isFavorite()
                     ? datacontext.attendance.deleteData
                     : datacontext.attendance.addData;
                 cudMethod(selectedSession,
-                        {
-                            success: function () { isBusy = false; },
-                            error: function () { isBusy = false; }
-                        }
-                    );
+                    {
+                        success: function() { isBusy = false; },
+                        error: function() { isBusy = false; }
+                    }
+                );
             },
 
-            init = function () {
+            init = function() {
                 // Bind jQuery delegated events
                 eventDelegates.sessionsListItem(gotoDetails);
                 eventDelegates.sessionsFavorite(saveFavorite);
@@ -142,7 +146,7 @@
                 addFilterSubscriptions();
             };
 
-            init();
+        init();
 
         return {
             activate: activate,

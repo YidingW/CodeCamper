@@ -1,16 +1,16 @@
-﻿define('vm.shell',
-    ['ko', 'config'],
-    function (ko, config) {
+﻿define("vm.shell",
+    ["ko", "config"],
+    function(ko, config) {
         var
             currentUser = config.currentUser,
 
             menuHashes = config.hashes,
 
-            activate = function (routeData) {
+            activate = function(routeData) {
                 //No-Op for now
             },
-            
-            init = function () {
+
+            init = function() {
                 activate();
             };
 

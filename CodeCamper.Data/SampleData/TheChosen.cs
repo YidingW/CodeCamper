@@ -8,17 +8,47 @@ namespace CodeCamper.Data.SampleData
     public static class TheChosen
     {
         public static List<Person> _theChosen;
+
         private static Person
-            _johnPapa, _colleenPapa, _danWahlin, _wardBell,  
-            _jimCowart, _ryanNiemeyer, _scottGuthrie, _steveSanderson, 
-            _aaronSkonnard, _fritzOnion, _scottHunter, _howardDierking, 
-            _madsKristensen, _elijahManor, _johnSmith, _estebanGarcia,
-            _shawnWildermuth, _peteBrown, _timHeuer, _julieLerman,
-            _scottHanselman, _glennBlock, _jesseLiberty, _ericBarnard,
-            _daveWard, _mikeCallaghan, _robEisenberg, _reyBango,
-            _hansFjallemark, _bradGreen, _igorMinar, _mikeWoodring,
-            _johnSonmez, _meganRussell, _keithSparkjoy, _jasonSalmond, 
+            _johnPapa,
+            _colleenPapa,
+            _danWahlin,
+            _wardBell,
+            _jimCowart,
+            _ryanNiemeyer,
+            _scottGuthrie,
+            _steveSanderson,
+            _aaronSkonnard,
+            _fritzOnion,
+            _scottHunter,
+            _howardDierking,
+            _madsKristensen,
+            _elijahManor,
+            _johnSmith,
+            _estebanGarcia,
+            _shawnWildermuth,
+            _peteBrown,
+            _timHeuer,
+            _julieLerman,
+            _scottHanselman,
+            _glennBlock,
+            _jesseLiberty,
+            _ericBarnard,
+            _daveWard,
+            _mikeCallaghan,
+            _robEisenberg,
+            _reyBango,
+            _hansFjallemark,
+            _bradGreen,
+            _igorMinar,
+            _mikeWoodring,
+            _johnSonmez,
+            _meganRussell,
+            _keithSparkjoy,
+            _jasonSalmond,
             _craigShoemaker;
+
+        public static List<Session> ChoosenAttendeeSessions { get; private set; }
 
         /// <summary>Add the Chosen people</summary>
         public static void AddPersons(List<Person> persons)
@@ -33,7 +63,8 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://johnp.contoso.com",
                 Twitter = "@john_papa",
                 Gender = "M",
-                Bio = "Husband, father, and Catholic enjoying every minute with my family. Microsoft Regional Director, Evangelist, speaker, author, and Pluralsight trainer.",
+                Bio =
+                    "Husband, father, and Catholic enjoying every minute with my family. Microsoft Regional Director, Evangelist, speaker, author, and Pluralsight trainer."
             });
             _theChosen.Add(_colleenPapa = new Person
             {
@@ -43,9 +74,9 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://colleenp.contoso.com",
                 Twitter = "@colleenpapa",
                 Gender = "F",
-                Bio = "Hard working wife and mother",
+                Bio = "Hard working wife and mother"
             });
-            _theChosen.Add(_danWahlin =new Person
+            _theChosen.Add(_danWahlin = new Person
             {
                 FirstName = "Dan",
                 LastName = "Wahlin",
@@ -53,7 +84,8 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://danw.contoso.com",
                 Twitter = "@danwahlin",
                 Gender = "M",
-                Bio = "Chief Architect at Wahlin Consulting. Provide consulting & training on jQuery, HTML5, ASP.NET, SharePoint. Husband & father, like to write and record music.",
+                Bio =
+                    "Chief Architect at Wahlin Consulting. Provide consulting & training on jQuery, HTML5, ASP.NET, SharePoint. Husband & father, like to write and record music."
             });
             _theChosen.Add(_wardBell = new Person
             {
@@ -63,7 +95,8 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://wardb.contoso.com",
                 Twitter = "@wardbell",
                 Gender = "M",
-                Bio = "V.P. of Technology at IdeaBlade. Speaks often on client application development issues to anyone who will listen. Likes sociology, history, poetry, and ridiculous clothes.",
+                Bio =
+                    "V.P. of Technology at IdeaBlade. Speaks often on client application development issues to anyone who will listen. Likes sociology, history, poetry, and ridiculous clothes."
             });
             _theChosen.Add(_hansFjallemark = new Person
             {
@@ -73,7 +106,8 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://hansf.contoso.com",
                 Twitter = "@hfjallemark",
                 Gender = "M",
-                Bio = "Freelancing developer & designer based in Sweden. I spend most of my time implementing usable and attractive UX in HTML5 or Silverli.. no wait, just HTML5:) ",
+                Bio =
+                    "Freelancing developer & designer based in Sweden. I spend most of my time implementing usable and attractive UX in HTML5 or Silverli.. no wait, just HTML5:) "
             });
             _theChosen.Add(_bradGreen = new Person
             {
@@ -83,7 +117,8 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://bradg.contoso.com",
                 Twitter = "@bradlygreen",
                 Gender = "M",
-                Bio = "I work at Google where I manage AngularJS and Google's internal sales productivity applications. I run barefoot. I'm a dad.",
+                Bio =
+                    "I work at Google where I manage AngularJS and Google's internal sales productivity applications. I run barefoot. I'm a dad."
             });
             _theChosen.Add(_igorMinar = new Person
             {
@@ -93,7 +128,7 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://igorm.contoso.com",
                 Twitter = "@igorminar",
                 Gender = "M",
-                Bio = "Software geek changing the web with angularjs.org",
+                Bio = "Software geek changing the web with angularjs.org"
             });
             _theChosen.Add(_mikeWoodring = new Person
             {
@@ -103,7 +138,7 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://mikew.contoso.com",
                 Twitter = "@mcwoodring ",
                 Gender = "M",
-                Bio = "VP of Developer Content - Enterprise Software at Pluralsight",
+                Bio = "VP of Developer Content - Enterprise Software at Pluralsight"
             });
             _theChosen.Add(_jimCowart = new Person
             {
@@ -113,7 +148,7 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://jimc.contoso.com",
                 Twitter = "@ifandelse",
                 Gender = "M",
-                Bio = "Husband, father, architect, developer, tea drinker. Opinions are my own. Unless they're good",
+                Bio = "Husband, father, architect, developer, tea drinker. Opinions are my own. Unless they're good"
             });
             _theChosen.Add(_ryanNiemeyer = new Person
             {
@@ -123,7 +158,7 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://ryann.contoso.com/",
                 Twitter = "@rpniemeyer",
                 Gender = "M",
-                Bio = "Coder, tester, father, and husband. Never short on ideas. Love to learn and collaborate.",
+                Bio = "Coder, tester, father, and husband. Never short on ideas. Love to learn and collaborate."
             });
             _theChosen.Add(_scottGuthrie = new Person
             {
@@ -133,7 +168,7 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://scottg.contoso.com",
                 Twitter = "@scottgu",
                 Gender = "M",
-                Bio = "I live in Seattle and build a few products for Microsoft",
+                Bio = "I live in Seattle and build a few products for Microsoft"
             });
             _theChosen.Add(_steveSanderson = new Person
             {
@@ -143,7 +178,7 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://steves.contoso.com",
                 Twitter = "@stevensanderson",
                 Gender = "M",
-                Bio = "Also known as Steven Sanderson",
+                Bio = "Also known as Steven Sanderson"
             });
             _theChosen.Add(_aaronSkonnard = new Person
             {
@@ -153,7 +188,7 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://aarons.contoso.com",
                 Twitter = "@skonnard",
                 Gender = "M",
-                Bio = "Changing the way software professionals learn. President/CEO of Pluralsight.",
+                Bio = "Changing the way software professionals learn. President/CEO of Pluralsight."
             });
             _theChosen.Add(_fritzOnion = new Person
             {
@@ -163,7 +198,7 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://fritzo.contoso.com",
                 Twitter = "",
                 Gender = "M",
-                Bio = "A co-founder of Pluralsight where he serves as the Editor in Chief.",
+                Bio = "A co-founder of Pluralsight where he serves as the Editor in Chief."
             });
             _theChosen.Add(_johnSmith = new Person
             {
@@ -173,7 +208,7 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://johns.contoso.com",
                 Twitter = "@onefloridacoder",
                 Gender = "M",
-                Bio = "Christian .NET Dev & Orlando .NET User Group VP; 4,5,6-string bass player.",
+                Bio = "Christian .NET Dev & Orlando .NET User Group VP; 4,5,6-string bass player."
             });
             _theChosen.Add(_scottHunter = new Person
             {
@@ -183,7 +218,8 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://scotth.contoso.com",
                 Twitter = "@coolcsh",
                 Gender = "M",
-                Bio = "Program Manager at Microsoft on web technologies such as Azure, ASP.NET, MVC, Web API, Entity Framework, NuGet and more...",
+                Bio =
+                    "Program Manager at Microsoft on web technologies such as Azure, ASP.NET, MVC, Web API, Entity Framework, NuGet and more..."
             });
             _theChosen.Add(_madsKristensen = new Person
             {
@@ -193,7 +229,7 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://madsk.contoso.com",
                 Twitter = "@mkristensen",
                 Gender = "M",
-                Bio = "Program Manager for Microsoft Web Platform & Tools and founder of BlogEngine.NET",
+                Bio = "Program Manager for Microsoft Web Platform & Tools and founder of BlogEngine.NET"
             });
             _theChosen.Add(_howardDierking = new Person
             {
@@ -203,7 +239,7 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://howardd.contoso.com",
                 Twitter = "@howard_dierking",
                 Gender = "M",
-                Bio = "I like technology...a lot...",
+                Bio = "I like technology...a lot..."
             });
             _theChosen.Add(_elijahManor = new Person
             {
@@ -213,7 +249,8 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://elijiahm.contoso.com",
                 Twitter = "@elijahmanor",
                 Gender = "M",
-                Bio = "I am a Christian and a family man. I develops at appendTo as a Senior Architect providing corporate jQuery support, training, and consulting.",
+                Bio =
+                    "I am a Christian and a family man. I develops at appendTo as a Senior Architect providing corporate jQuery support, training, and consulting."
             });
             _theChosen.Add(_estebanGarcia = new Person
             {
@@ -223,7 +260,8 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://estebang.contoso.com",
                 Twitter = "@EstebanFGarcia",
                 Gender = "M",
-                Bio = "TFS | Visual Studio ALM Ranger | Scrum | .NET Development | Solutions Architect at @AgileThought | @ONETUG President | UCF Knight",
+                Bio =
+                    "TFS | Visual Studio ALM Ranger | Scrum | .NET Development | Solutions Architect at @AgileThought | @ONETUG President | UCF Knight"
             });
             _theChosen.Add(_shawnWildermuth = new Person
             {
@@ -233,7 +271,8 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://shawnw.contoso.com",
                 Twitter = "@ShawnWildermuth",
                 Gender = "M",
-                Bio = "Author, trainer, software guy, Braves fan, guitar player, Xbox maven, coffee addict and astronomy fan.",
+                Bio =
+                    "Author, trainer, software guy, Braves fan, guitar player, Xbox maven, coffee addict and astronomy fan."
             });
             _theChosen.Add(_peteBrown = new Person
             {
@@ -243,7 +282,7 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://peteb.contoso.com",
                 Twitter = "@Pete_Brown",
                 Gender = "M",
-                Bio = "Microsoft XAML and blinky lights guy. Father of two, author, woodworker, C64.",
+                Bio = "Microsoft XAML and blinky lights guy. Father of two, author, woodworker, C64."
             });
             _theChosen.Add(_robEisenberg = new Person
             {
@@ -253,7 +292,8 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://reisenberg.contoso.com",
                 Twitter = "@EisenbergEffect",
                 Gender = "M",
-                Bio = "Chief Architect at Blue Spire Consulting, Inc. and director of the Caliburn.Micro and Durandal projects.",
+                Bio =
+                    "Chief Architect at Blue Spire Consulting, Inc. and director of the Caliburn.Micro and Durandal projects."
             });
             _theChosen.Add(_timHeuer = new Person
             {
@@ -263,7 +303,8 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://timh.contoso.com",
                 Twitter = "@timheuer",
                 Gender = "M",
-                Bio = "I work on XAML client platforms at Microsoft and trying to be the best dad/husband I can be when I'm not working.",
+                Bio =
+                    "I work on XAML client platforms at Microsoft and trying to be the best dad/husband I can be when I'm not working."
             });
             _theChosen.Add(_julieLerman = new Person
             {
@@ -273,7 +314,8 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://juliel.contoso.com",
                 Twitter = "@julielerman",
                 Gender = "F",
-                Bio = "Vermont Geekette, .NET (and Entity Framework) Mentor/Consultant, Author, MS MVP, INETA Speaker, Vermont.NET User Group Leader",
+                Bio =
+                    "Vermont Geekette, .NET (and Entity Framework) Mentor/Consultant, Author, MS MVP, INETA Speaker, Vermont.NET User Group Leader"
             });
             _theChosen.Add(_glennBlock = new Person
             {
@@ -283,7 +325,7 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://glennb.contoso.com",
                 Twitter = "@gblock",
                 Gender = "M",
-                Bio = "Father, Husband, Spiritualist, Software geek, Change agent, REST Head",
+                Bio = "Father, Husband, Spiritualist, Software geek, Change agent, REST Head"
             });
             _theChosen.Add(_scottHanselman = new Person
             {
@@ -293,7 +335,8 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://shanselman.contoso.com",
                 Twitter = "@shanselman",
                 Gender = "M",
-                Bio = "Tech, Diabetes, Parenting, Race, Linguistics, Fashion, Podcasting, Open Source, Culture, Code, Ratchet, Phony.",
+                Bio =
+                    "Tech, Diabetes, Parenting, Race, Linguistics, Fashion, Podcasting, Open Source, Culture, Code, Ratchet, Phony."
             });
             _theChosen.Add(_jesseLiberty = new Person
             {
@@ -303,7 +346,7 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://jliberty.contoso.com",
                 Twitter = "@JesseLiberty",
                 Gender = "M",
-                Bio = "Telerik XAML Evangelist",
+                Bio = "Telerik XAML Evangelist"
             });
             _theChosen.Add(_ericBarnard = new Person
             {
@@ -313,7 +356,7 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://ebarnard.contoso.com",
                 Twitter = "@EricBarnard",
                 Gender = "M",
-                Bio = "Technologist and Entrepreneur trying to find my where my path and the world's needs cross",
+                Bio = "Technologist and Entrepreneur trying to find my where my path and the world's needs cross"
             });
             _theChosen.Add(_daveWard = new Person
             {
@@ -323,7 +366,7 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://dward.contoso.com",
                 Twitter = "@encosia",
                 Gender = "M",
-                Bio = "Microsoft Regional Director",
+                Bio = "Microsoft Regional Director"
             });
 
             _theChosen.Add(_mikeCallaghan = new Person
@@ -334,7 +377,8 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://mcallaghan.contoso.com",
                 Twitter = "@walkingriver",
                 Gender = "M",
-                Bio = "Mike has been developing software professionally since 1995, primarily in Microsoft environments.",
+                Bio =
+                    "Mike has been developing software professionally since 1995, primarily in Microsoft environments."
             });
 
             _theChosen.Add(_reyBango = new Person
@@ -345,7 +389,7 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://rbango.contoso.com",
                 Twitter = "@reybango",
                 Gender = "M",
-                Bio = "Delivering HTML5 & JavaScript babies. Web dev lover at Microsoft.",
+                Bio = "Delivering HTML5 & JavaScript babies. Web dev lover at Microsoft."
             });
 
             _theChosen.Add(_johnSonmez = new Person
@@ -356,7 +400,7 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://jsonmez.contoso.com",
                 Twitter = "@jsonmez",
                 Gender = "M",
-                Bio = "I make the complex simple.",
+                Bio = "I make the complex simple."
             });
 
             _theChosen.Add(_meganRussell = new Person
@@ -367,7 +411,8 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://mrussell.contoso.com",
                 Twitter = "@megbruss",
                 Gender = "F",
-                Bio = "Lover of all things new and creative. Advocate of education. Accepts all challenges. Fitness Junkie. Health Nut. Ballerina. Teacher. Editor. Marketing. @pluralsight",
+                Bio =
+                    "Lover of all things new and creative. Advocate of education. Accepts all challenges. Fitness Junkie. Health Nut. Ballerina. Teacher. Editor. Marketing. @pluralsight"
             });
 
             _theChosen.Add(_craigShoemaker = new Person
@@ -378,7 +423,8 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://cshoemaker.contoso.com",
                 Twitter = "@craigshoemaker",
                 Gender = "M",
-                Bio = "Technical Evangelist for all things awesome. Host of Polymorphic Podcast. Author for @pluralsight & @CODEmagazine",
+                Bio =
+                    "Technical Evangelist for all things awesome. Host of Polymorphic Podcast. Author for @pluralsight & @CODEmagazine"
             });
 
             _theChosen.Add(_jasonSalmond = new Person
@@ -389,7 +435,8 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://jsalmond.contoso.com",
                 Twitter = "@bruthafish",
                 Gender = "M",
-                Bio = "Husband to a beautiful wife, father of four boys, bass singer, Acappella junkie, Pluralsight editor, the new XML.",
+                Bio =
+                    "Husband to a beautiful wife, father of four boys, bass singer, Acappella junkie, Pluralsight editor, the new XML."
             });
 
             _theChosen.Add(_keithSparkjoy = new Person
@@ -400,10 +447,11 @@ namespace CodeCamper.Data.SampleData
                 Blog = "http://ksparkjoy.contoso.com",
                 Twitter = "@keithbrown42",
                 Gender = "M",
-                Bio = "CTO and cofounder of Pluralsight, providing hardcore tech training for both software developers and IT pros alike.",
+                Bio =
+                    "CTO and cofounder of Pluralsight, providing hardcore tech training for both software developers and IT pros alike."
             });
 
-            _theChosen.ForEach(p => p.ImageSource = 
+            _theChosen.ForEach(p => p.ImageSource =
                 (p.FirstName + "_" + p.LastName + ".jpg").ToLowerInvariant());
 
             _hansFjallemark.ImageSource = "hans_fjallemark.jpg"; // get rid of 'ä'
@@ -469,13 +517,13 @@ namespace CodeCamper.Data.SampleData
          *    arbitrarily assigns ratings and evals to the first
          *    'n' (n==4?) ChoosenAttendeeSessions.
          */
+
         public static List<Session> AddSessions(
             IList<TimeSlot> timeSlots,
             IList<Track> tracks,
             string[] levels,
             IList<Room> roomsForSessions)
         {
-
             var sessions = new List<Session>();
             ChoosenAttendeeSessions = new List<Session>();
 
@@ -489,12 +537,13 @@ namespace CodeCamper.Data.SampleData
             // Deterministic way to get id of next speaker timeslot
             Func<int> getNextSpeakerTimeSlotId =
                 () =>
-                    {
-                       if (++nextSlotIx == availableTimeSlotIds.Count()) nextSlotIx = 0;
-                        return availableTimeSlotIds[nextSlotIx];
-                    };
+                {
+                    if (++nextSlotIx == availableTimeSlotIds.Count()) nextSlotIx = 0;
+                    return availableTimeSlotIds[nextSlotIx];
+                };
 
-            Func<Person, int> getRoomId = choosenOne => roomsForSessions[_theChosen.IndexOf(choosenOne) % roomsForSessions.Count].Id;
+            Func<Person, int> getRoomId =
+                choosenOne => roomsForSessions[_theChosen.IndexOf(choosenOne)%roomsForSessions.Count].Id;
 
             // Adds session to Sessions and optionally to ChooenAttendeeSessions
             Func<bool, Session, Session> addSession =
@@ -520,7 +569,7 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_scottGuthrie),
                 Level = levels[1],
                 Tags = "Keynote",
-                Description = "Change the World",
+                Description = "Change the World"
             });
 
             // John Papa
@@ -535,7 +584,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[0],
                 Tags = "JavaScript|Knockout|MVVM|HTML5|Web|Durandal",
                 Description =
-                    "Build end-to-end SPA solutions including code structure and modularity, using data binding and MVVM, abstracted remote data calls, page navigation and routing, rich data features, and responsive design for mobility. Along the way I'll also touch on popular libraries such as Knockout, Durandal, and Breeze. ",
+                    "Build end-to-end SPA solutions including code structure and modularity, using data binding and MVVM, abstracted remote data calls, page navigation and routing, rich data features, and responsive design for mobility. Along the way I'll also touch on popular libraries such as Knockout, Durandal, and Breeze. "
             });
 
             // Colleen Papa
@@ -550,9 +599,9 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[0],
                 Tags = "JavaScript|Knockout|MVVM|HTML5|Web",
                 Description =
-                    "Do you write a lot of HTML and JavaScript code to push and pull data? In this session, learn popular techniques to use data binding to bind your data to your target controls in HTML writing less code, but gaining more power. See how to consume json data, use json objects in JavaScript, use declarative binding, using KnockoutJS. Also, see how to use the MVVM pattern to write data centric JavaScript code that follows good separation patterns and creates highly maintainable code.",
+                    "Do you write a lot of HTML and JavaScript code to push and pull data? In this session, learn popular techniques to use data binding to bind your data to your target controls in HTML writing less code, but gaining more power. See how to consume json data, use json objects in JavaScript, use declarative binding, using KnockoutJS. Also, see how to use the MVVM pattern to write data centric JavaScript code that follows good separation patterns and creates highly maintainable code."
             });
-            
+
             // Scott Guthrie
             addSession(false, new Session
             {
@@ -565,7 +614,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[1],
                 Tags = "ASP|MVC|Web",
                 Description =
-                    "MVC 4 enables a wider variety of web applications than ever before. The libraries that are easily managed through Nuget and are truly opens source. Learn about the new capabilities and how you can contribute to ASP.NET MVC's evolution.",
+                    "MVC 4 enables a wider variety of web applications than ever before. The libraries that are easily managed through Nuget and are truly opens source. Learn about the new capabilities and how you can contribute to ASP.NET MVC's evolution."
             });
 
             // Julie Lerman
@@ -580,7 +629,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[0],
                 Tags = "Data|Entity Framework|ORM",
                 Description =
-                    "Discover how Entity Framework Code First can improve your life!",
+                    "Discover how Entity Framework Code First can improve your life!"
             });
 
             // Dan Wahlin
@@ -594,7 +643,8 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_danWahlin),
                 Level = levels[2],
                 Tags = "MVC|HTML5|Entity Framework|jQuery|Web",
-                Description = "This session provides an end-to-end look at building a Web application using several different technologies.",
+                Description =
+                    "This session provides an end-to-end look at building a Web application using several different technologies."
             });
 
             // John Papa
@@ -609,7 +659,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[2],
                 Tags = "Angular|Breeze|JavaScript|Web",
                 Description =
-                    "Build a SPA, then hang out in one.",
+                    "Build a SPA, then hang out in one."
             });
 
             // Colleen Papa
@@ -624,7 +674,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[1],
                 Tags = "JavaScript|JsRender|Web",
                 Description =
-                    "Learn how to build fast, robust, and maintainable Web applications with JavaScript, jQuery and JsRender: the successor to jQuery Templates.",
+                    "Learn how to build fast, robust, and maintainable Web applications with JavaScript, jQuery and JsRender: the successor to jQuery Templates."
             });
             // John Papa
             addSession(false, new Session
@@ -638,7 +688,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[1],
                 Tags = "JavaScript|JsRender|Web|TypeScript",
                 Description =
-                    "Learn the key concepts and features that you need to know to get started with TypeScript, and use it to build large (and small) scale JavaScript applications.",
+                    "Learn the key concepts and features that you need to know to get started with TypeScript, and use it to build large (and small) scale JavaScript applications."
             });
 
             //Scott Hunter
@@ -652,7 +702,8 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_scottHunter),
                 Level = levels[1],
                 Tags = "Cloud|Azure|Node|Web",
-                Description = "Windows Azure offers reliable, affordable cloud computing for almost any application of any scale, built with any technology. Scott demonstates with examples of both Windows and non-Windows applications.",
+                Description =
+                    "Windows Azure offers reliable, affordable cloud computing for almost any application of any scale, built with any technology. Scott demonstates with examples of both Windows and non-Windows applications."
             });
 
             // Mads Kristensen
@@ -667,7 +718,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[1],
                 Tags = "Web Forms|ASP|Web|.NET|",
                 Description =
-                    "Scale tall buildings, defeat fire breathing dragons, and be more productive in Visual Studio!",
+                    "Scale tall buildings, defeat fire breathing dragons, and be more productive in Visual Studio!"
             });
 
             // Megan Russell
@@ -681,7 +732,7 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_meganRussell),
                 Level = levels[2],
                 Tags = "Design|Teaching",
-                Description = "Learn how to create a super successful Pluralsight course!",
+                Description = "Learn how to create a super successful Pluralsight course!"
             });
 
             // Ward Bell
@@ -695,9 +746,10 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_keithSparkjoy),
                 Level = levels[2],
                 Tags = "Design|Career",
-                Description = "Learn how to make better decisions and handle problem solving to lead to a better career.",
+                Description =
+                    "Learn how to make better decisions and handle problem solving to lead to a better career."
             });
-            
+
             // Ward Bell
             addSession(false, new Session
             {
@@ -709,7 +761,8 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_wardBell),
                 Level = levels[2],
                 Tags = "Design|Animation|Metro",
-                Description = "You must have style to design with style. A proper wardrobe is an essential first step to application success. Learn to dress from this old pro.",
+                Description =
+                    "You must have style to design with style. A proper wardrobe is an essential first step to application success. Learn to dress from this old pro."
             });
             addSession(false, new Session
             {
@@ -722,7 +775,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[0],
                 Tags = "Data|JavaScript|Web",
                 Description =
-                    "Do you wanna query like LINQ, make promises async, and write JavaScript code in your sleep? CatchLearn how to do that and make bring rich data features to your web apps.",
+                    "Do you wanna query like LINQ, make promises async, and write JavaScript code in your sleep? CatchLearn how to do that and make bring rich data features to your web apps."
             });
 
             // Jason Salmond
@@ -737,7 +790,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[1],
                 Tags = "JavaScript|Web",
                 Description =
-                    "You need a good set of tools to be a rock star JavaScript developer. What does Ward use to write, test and debug? Come to this session and find out.",
+                    "You need a good set of tools to be a rock star JavaScript developer. What does Ward use to write, test and debug? Come to this session and find out."
             });
 
             // Rob Eisenberg
@@ -752,7 +805,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[1],
                 Tags = "JavaScript|Web|HTML5",
                 Description =
-                    "Build a HTML5/JavaScript SPA with Durandal",
+                    "Build a HTML5/JavaScript SPA with Durandal"
             });
 
             // Howard Dierking
@@ -766,7 +819,7 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_howardDierking),
                 Level = levels[2],
                 Tags = "MVC|HTML5|Entity Framework|jQuery|Web",
-                Description = "TBD",
+                Description = "TBD"
             });
             // Rey Bango
             addSession(false, new Session
@@ -780,7 +833,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[0],
                 Tags = "Windows|Metro",
                 Description =
-                    "This session covers everything you need to know to get started building Metro apps.",
+                    "This session covers everything you need to know to get started building Metro apps."
             });
 
             // Hans Fjällemark
@@ -795,7 +848,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[0],
                 Tags = "CSS|Responsive Design|Web",
                 Description =
-                    "TBD",
+                    "TBD"
             });
 
             // Mike Woodring
@@ -810,7 +863,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[1],
                 Tags = "CSS3|Responsive Design|Web",
                 Description =
-                    "TBD",
+                    "TBD"
             });
 
             // Jim Cowart
@@ -824,7 +877,7 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_jimCowart),
                 Level = levels[2],
                 Tags = "JavaScript|Underscore|jQuery|Web",
-                Description = "TBD",
+                Description = "TBD"
             });
 
             // Eric Barnard
@@ -839,7 +892,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[0],
                 Tags = "Knockout|JavaScript|Web",
                 Description =
-                    "This session guides you through model validation with Knockout",
+                    "This session guides you through model validation with Knockout"
             });
 
             // Craig Shoemaker
@@ -854,7 +907,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[0],
                 Tags = "HTML|Web",
                 Description =
-                    "The best-est most awesome-est HTML on Earth!",
+                    "The best-est most awesome-est HTML on Earth!"
             });
 
             // Shawn Wildermuth
@@ -869,7 +922,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[0],
                 Tags = "CSS|Web",
                 Description =
-                    "TBD",
+                    "TBD"
             });
 
             // Tim Heuer
@@ -884,7 +937,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[2],
                 Tags = "Windows 8|XAML|WinRT|Metro|C#",
                 Description =
-                    "TBD",
+                    "TBD"
             });
 
             // Pete Brown
@@ -899,7 +952,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[2],
                 Tags = "Windows 8|XAML|WinRT|Metro|C#",
                 Description =
-                    "TBD",
+                    "TBD"
             });
 
             // Steve Sanderson
@@ -914,7 +967,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[2],
                 Tags = "Knockout|JavaScript|Web",
                 Description =
-                    "TBD",
+                    "TBD"
             });
 
             // Ryan Niemeyer
@@ -928,7 +981,7 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_ryanNiemeyer),
                 Level = levels[0],
                 Tags = "Knockout|JavaScript|Web",
-                Description = "TBD",
+                Description = "TBD"
             });
 
             // Jesse Liberty
@@ -942,7 +995,7 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_jesseLiberty),
                 Level = levels[1],
                 Tags = "XAML|WinRT|C#|Metro|Windows",
-                Description = "TBD",
+                Description = "TBD"
             });
 
             // Elijiah Manor
@@ -956,7 +1009,7 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_elijahManor),
                 Level = levels[1],
                 Tags = "Amplify|JavaScript|Web",
-                Description = "TBD",
+                Description = "TBD"
             });
 
             // Aaron Skonnard
@@ -970,7 +1023,7 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_aaronSkonnard),
                 Level = levels[2],
                 Tags = "WCF|REST|Web",
-                Description = "TBD",
+                Description = "TBD"
             });
 
             // Fritz Onion
@@ -984,7 +1037,7 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_fritzOnion),
                 Level = levels[1],
                 Tags = "Design",
-                Description = "TBD",
+                Description = "TBD"
             });
 
             // John Smith
@@ -998,7 +1051,7 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_johnSmith),
                 Level = levels[1],
                 Tags = "ASP.NET|Web|Azure",
-                Description = "TBD",
+                Description = "TBD"
             });
 
             // Esteban Garcia
@@ -1013,7 +1066,7 @@ namespace CodeCamper.Data.SampleData
                 Level = levels[0],
                 Tags = "TFS|Practices",
                 Description =
-                    "TBD",
+                    "TBD"
             });
 
             // Glenn BLock
@@ -1027,7 +1080,7 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_glennBlock),
                 Level = levels[1],
                 Tags = "ASP.NET|Web|Web API",
-                Description = "TBD",
+                Description = "TBD"
             });
 
             // Dave Ward
@@ -1041,7 +1094,7 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_daveWard),
                 Level = levels[1],
                 Tags = "ASP.NET|Web|Web API",
-                Description = "TBD",
+                Description = "TBD"
             });
 
             // Scott Hanselman
@@ -1055,7 +1108,7 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_scottHanselman),
                 Level = levels[1],
                 Tags = "NuGet",
-                Description = "TBD",
+                Description = "TBD"
             });
 
             // Mike Callaghan
@@ -1069,7 +1122,8 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_mikeCallaghan),
                 Level = levels[1],
                 Tags = "Web | SignalR",
-                Description = "Learn how to build a multidimensional universal transporter using SignalR. Not really ... but we will cover some cool SignalR code.",
+                Description =
+                    "Learn how to build a multidimensional universal transporter using SignalR. Not really ... but we will cover some cool SignalR code."
             });
 
             // Brad Green
@@ -1083,7 +1137,7 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_bradGreen),
                 Level = levels[1],
                 Tags = "Web | JavaScript | Angular",
-                Description = "Learn what's new in the latest version of AngularJS.",
+                Description = "Learn what's new in the latest version of AngularJS."
             });
 
             // Igor Minar
@@ -1097,7 +1151,7 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_igorMinar),
                 Level = levels[1],
                 Tags = "Web | JavaScript | Angular",
-                Description = "Take a deep dive into the realm of Angular routing.",
+                Description = "Take a deep dive into the realm of Angular routing."
             });
 
             // John Sonmez
@@ -1111,15 +1165,14 @@ namespace CodeCamper.Data.SampleData
                 RoomId = getRoomId(_johnSonmez),
                 Level = levels[1],
                 Tags = "Mobile | iOS | Android",
-                Description = "Slay dragons, rescue princesses, and create awesome mobile apps.",
+                Description = "Slay dragons, rescue princesses, and create awesome mobile apps."
             });
 
             return sessions;
         }
 
-        public static List<Session> ChoosenAttendeeSessions { get; private set; }
-
-        private static void EnsureTimeSlotIdIsFree(List<int> usedAttendeeSlots, Session session, Func<int> getNextTimeSlotId)
+        private static void EnsureTimeSlotIdIsFree(List<int> usedAttendeeSlots, Session session,
+            Func<int> getNextTimeSlotId)
         {
             var origSlot = session.TimeSlotId;
             var slot = origSlot;

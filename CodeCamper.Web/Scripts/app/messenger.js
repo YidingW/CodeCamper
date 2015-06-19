@@ -1,14 +1,14 @@
-﻿define('messenger',
-['amplify', 'config'],
-    function (amplify, config) {
+﻿define("messenger",
+    ["amplify", "config"],
+    function(amplify, config) {
         var
             priority = 1,
-            
-            publish = function (topic, options) {
+
+            publish = function(topic, options) {
                 amplify.publish(topic, options);
             },
 
-            subscribe = function (options) {
+            subscribe = function(options) {
                 amplify.subscribe(
                     options.topic,
                     options.context,

@@ -8,6 +8,7 @@ namespace CodeCamper.Model
         {
             IsSessionSlot = true;
         }
+
         public int Id { get; set; }
         public DateTime Start { get; set; }
         public bool IsSessionSlot { get; set; }
